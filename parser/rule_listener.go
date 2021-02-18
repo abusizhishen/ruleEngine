@@ -8,6 +8,9 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 type RuleListener interface {
 	antlr.ParseTreeListener
 
+	// EnterBoolOperate is called when entering the boolOperate production.
+	EnterBoolOperate(c *BoolOperateContext)
+
 	// EnterCalculate is called when entering the calculate production.
 	EnterCalculate(c *CalculateContext)
 
@@ -17,17 +20,38 @@ type RuleListener interface {
 	// EnterLogical is called when entering the logical production.
 	EnterLogical(c *LogicalContext)
 
-	// EnterCompareStatement is called when entering the compareStatement production.
-	EnterCompareStatement(c *CompareStatementContext)
+	// EnterCOMPARE is called when entering the COMPARE production.
+	EnterCOMPARE(c *COMPAREContext)
+
+	// EnterCOMPAREX is called when entering the COMPAREX production.
+	EnterCOMPAREX(c *COMPAREXContext)
+
+	// EnterIDEN is called when entering the IDEN production.
+	EnterIDEN(c *IDENContext)
+
+	// EnterNUM is called when entering the NUM production.
+	EnterNUM(c *NUMContext)
 
 	// EnterCalculateStatement is called when entering the calculateStatement production.
 	EnterCalculateStatement(c *CalculateStatementContext)
 
-	// EnterStatement is called when entering the statement production.
-	EnterStatement(c *StatementContext)
+	// EnterBOOL is called when entering the BOOL production.
+	EnterBOOL(c *BOOLContext)
+
+	// EnterIDENBOOL is called when entering the IDENBOOL production.
+	EnterIDENBOOL(c *IDENBOOLContext)
+
+	// EnterCOMPAREVALUE is called when entering the COMPAREVALUE production.
+	EnterCOMPAREVALUE(c *COMPAREVALUEContext)
+
+	// EnterBoolStatement is called when entering the boolStatement production.
+	EnterBoolStatement(c *BoolStatementContext)
 
 	// EnterInit is called when entering the init production.
 	EnterInit(c *InitContext)
+
+	// ExitBoolOperate is called when exiting the boolOperate production.
+	ExitBoolOperate(c *BoolOperateContext)
 
 	// ExitCalculate is called when exiting the calculate production.
 	ExitCalculate(c *CalculateContext)
@@ -38,14 +62,32 @@ type RuleListener interface {
 	// ExitLogical is called when exiting the logical production.
 	ExitLogical(c *LogicalContext)
 
-	// ExitCompareStatement is called when exiting the compareStatement production.
-	ExitCompareStatement(c *CompareStatementContext)
+	// ExitCOMPARE is called when exiting the COMPARE production.
+	ExitCOMPARE(c *COMPAREContext)
+
+	// ExitCOMPAREX is called when exiting the COMPAREX production.
+	ExitCOMPAREX(c *COMPAREXContext)
+
+	// ExitIDEN is called when exiting the IDEN production.
+	ExitIDEN(c *IDENContext)
+
+	// ExitNUM is called when exiting the NUM production.
+	ExitNUM(c *NUMContext)
 
 	// ExitCalculateStatement is called when exiting the calculateStatement production.
 	ExitCalculateStatement(c *CalculateStatementContext)
 
-	// ExitStatement is called when exiting the statement production.
-	ExitStatement(c *StatementContext)
+	// ExitBOOL is called when exiting the BOOL production.
+	ExitBOOL(c *BOOLContext)
+
+	// ExitIDENBOOL is called when exiting the IDENBOOL production.
+	ExitIDENBOOL(c *IDENBOOLContext)
+
+	// ExitCOMPAREVALUE is called when exiting the COMPAREVALUE production.
+	ExitCOMPAREVALUE(c *COMPAREVALUEContext)
+
+	// ExitBoolStatement is called when exiting the boolStatement production.
+	ExitBoolStatement(c *BoolStatementContext)
 
 	// ExitInit is called when exiting the init production.
 	ExitInit(c *InitContext)

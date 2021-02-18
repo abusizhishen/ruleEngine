@@ -1,11 +1,17 @@
 grammar Rule;
-IDENTIFY:[a-zA-Z_]+;
 NUM:[0-9]+;
 NOW:'now()';
 
 AND:'and';
 OR:'or';
 NOT:'not';
+
+boolOperate
+    :AND
+    |OR
+    |NOT
+    ;
+IDENTIFY:[a-zA-Z_]+;
 
 GT:'>';
 GTE:'>=';
@@ -44,22 +50,31 @@ logical
     ;
 
 compareStatement
-    :compareStatement op=compare compareStatement
-    |IDENTIFY
-    |TRUE
-    |FALSE
-    |'(' compareStatement')'
+    :calculateValue op=compare calculateValue #COMPARE
+    |calculateStatement #COMPAREX
+    |'(' compareStatement')' #COMPAREX
     ;
+
+calculateValue
+    :IDENTIFY #IDEN
+    |NUM #NUM
+    ;
+
 calculateStatement
-    :calculateStatement op = calculate calculateStatement
-    |IDENTIFY
-    |NUM
+    :calculateValue op=calculate calculateValue
     |'(' calculateStatement')'
     ;
 
-statement
-    :calculateStatement
-    |compareStatement
+boolValue
+    :TRUE #BOOL
+    |FALSE #BOOL
+    |IDENTIFY # IDENBOOL
+    |compareStatement #COMPAREVALUE
     ;
 
-init:statement* EOF;
+boolStatement
+    : boolValue op=boolOperate boolValue
+    |'(' boolStatement')'
+    ;
+
+init:boolStatement* EOF?;
