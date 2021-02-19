@@ -21,5 +21,8 @@ func main() {
 	tokens := antlr.NewCommonTokenStream(lex, antlr.TokenDefaultChannel)
 
 	p := parser.NewRuleParser(tokens)
-	antlr.ParseTreeWalkerDefault.Walk(src.New(map[string]interface{}{"a":false, "b": 1,"c":0}), p.Init())
+
+	antlr.ParseTreeWalkerDefault.Walk(src.New(data), p.Init())
 }
+
+var data = map[string]interface{}{"a":true, "b": 1,"c":0}

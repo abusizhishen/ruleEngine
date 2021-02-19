@@ -77,4 +77,9 @@ boolStatement
     |'(' boolStatement')'
     ;
 
-init:boolStatement* EOF?;
+statement
+    :boolStatement
+    |compareStatement
+    |calculateStatement
+    ;
+init:statement* EOF?;
