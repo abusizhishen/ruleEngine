@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-	input,err := antlr.NewFileStream("test.rule")
-	if err != nil{
+	input, err := antlr.NewFileStream("test.rule")
+	if err != nil {
 		panic(err)
 	}
 
@@ -25,4 +25,4 @@ func main() {
 	antlr.ParseTreeWalkerDefault.Walk(src.New(data), p.Init())
 }
 
-var data = map[string]interface{}{"a":true, "b": 1,"c":0}
+var data = map[string]interface{}{"a": true, "b": 1, "c": 0}

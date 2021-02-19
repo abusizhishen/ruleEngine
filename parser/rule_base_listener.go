@@ -1,4 +1,4 @@
-// Code generated from Rule.g4 by ANTLR 4.8. DO NOT EDIT.
+// Code generated from Rule.g4 by ANTLR 4.7.2. DO NOT EDIT.
 
 package parser // Rule
 
@@ -45,17 +45,29 @@ func (s *BaseRuleListener) EnterLogical(ctx *LogicalContext) {}
 // ExitLogical is called when production logical is exited.
 func (s *BaseRuleListener) ExitLogical(ctx *LogicalContext) {}
 
+// EnterCOMPAREX is called when production COMPAREX is entered.
+func (s *BaseRuleListener) EnterCOMPAREX(ctx *COMPAREXContext) {}
+
+// ExitCOMPAREX is called when production COMPAREX is exited.
+func (s *BaseRuleListener) ExitCOMPAREX(ctx *COMPAREXContext) {}
+
 // EnterCOMPARE is called when production COMPARE is entered.
 func (s *BaseRuleListener) EnterCOMPARE(ctx *COMPAREContext) {}
 
 // ExitCOMPARE is called when production COMPARE is exited.
 func (s *BaseRuleListener) ExitCOMPARE(ctx *COMPAREContext) {}
 
-// EnterCOMPAREX is called when production COMPAREX is entered.
-func (s *BaseRuleListener) EnterCOMPAREX(ctx *COMPAREXContext) {}
+// EnterCalcu is called when production Calcu is entered.
+func (s *BaseRuleListener) EnterCalcu(ctx *CalcuContext) {}
 
-// ExitCOMPAREX is called when production COMPAREX is exited.
-func (s *BaseRuleListener) ExitCOMPAREX(ctx *COMPAREXContext) {}
+// ExitCalcu is called when production Calcu is exited.
+func (s *BaseRuleListener) ExitCalcu(ctx *CalcuContext) {}
+
+// EnterITEMCOMP is called when production ITEMCOMP is entered.
+func (s *BaseRuleListener) EnterITEMCOMP(ctx *ITEMCOMPContext) {}
+
+// ExitITEMCOMP is called when production ITEMCOMP is exited.
+func (s *BaseRuleListener) ExitITEMCOMP(ctx *ITEMCOMPContext) {}
 
 // EnterIDEN is called when production IDEN is entered.
 func (s *BaseRuleListener) EnterIDEN(ctx *IDENContext) {}
@@ -69,11 +81,29 @@ func (s *BaseRuleListener) EnterNUM(ctx *NUMContext) {}
 // ExitNUM is called when production NUM is exited.
 func (s *BaseRuleListener) ExitNUM(ctx *NUMContext) {}
 
-// EnterCalculateStatement is called when production calculateStatement is entered.
-func (s *BaseRuleListener) EnterCalculateStatement(ctx *CalculateStatementContext) {}
+// EnterITEMCALCU is called when production ITEMCALCU is entered.
+func (s *BaseRuleListener) EnterITEMCALCU(ctx *ITEMCALCUContext) {}
 
-// ExitCalculateStatement is called when production calculateStatement is exited.
-func (s *BaseRuleListener) ExitCalculateStatement(ctx *CalculateStatementContext) {}
+// ExitITEMCALCU is called when production ITEMCALCU is exited.
+func (s *BaseRuleListener) ExitITEMCALCU(ctx *ITEMCALCUContext) {}
+
+// EnterADDSUB is called when production ADDSUB is entered.
+func (s *BaseRuleListener) EnterADDSUB(ctx *ADDSUBContext) {}
+
+// ExitADDSUB is called when production ADDSUB is exited.
+func (s *BaseRuleListener) ExitADDSUB(ctx *ADDSUBContext) {}
+
+// EnterMULDIV is called when production MULDIV is entered.
+func (s *BaseRuleListener) EnterMULDIV(ctx *MULDIVContext) {}
+
+// ExitMULDIV is called when production MULDIV is exited.
+func (s *BaseRuleListener) ExitMULDIV(ctx *MULDIVContext) {}
+
+// EnterCALCULATEX is called when production CALCULATEX is entered.
+func (s *BaseRuleListener) EnterCALCULATEX(ctx *CALCULATEXContext) {}
+
+// ExitCALCULATEX is called when production CALCULATEX is exited.
+func (s *BaseRuleListener) ExitCALCULATEX(ctx *CALCULATEXContext) {}
 
 // EnterBOOL is called when production BOOL is entered.
 func (s *BaseRuleListener) EnterBOOL(ctx *BOOLContext) {}
@@ -81,23 +111,35 @@ func (s *BaseRuleListener) EnterBOOL(ctx *BOOLContext) {}
 // ExitBOOL is called when production BOOL is exited.
 func (s *BaseRuleListener) ExitBOOL(ctx *BOOLContext) {}
 
+// EnterBOOLOP is called when production BOOLOP is entered.
+func (s *BaseRuleListener) EnterBOOLOP(ctx *BOOLOPContext) {}
+
+// ExitBOOLOP is called when production BOOLOP is exited.
+func (s *BaseRuleListener) ExitBOOLOP(ctx *BOOLOPContext) {}
+
 // EnterIDENBOOL is called when production IDENBOOL is entered.
 func (s *BaseRuleListener) EnterIDENBOOL(ctx *IDENBOOLContext) {}
 
 // ExitIDENBOOL is called when production IDENBOOL is exited.
 func (s *BaseRuleListener) ExitIDENBOOL(ctx *IDENBOOLContext) {}
 
-// EnterCOMPAREVALUE is called when production COMPAREVALUE is entered.
-func (s *BaseRuleListener) EnterCOMPAREVALUE(ctx *COMPAREVALUEContext) {}
+// EnterCOMPAREBOOL is called when production COMPAREBOOL is entered.
+func (s *BaseRuleListener) EnterCOMPAREBOOL(ctx *COMPAREBOOLContext) {}
 
-// ExitCOMPAREVALUE is called when production COMPAREVALUE is exited.
-func (s *BaseRuleListener) ExitCOMPAREVALUE(ctx *COMPAREVALUEContext) {}
+// ExitCOMPAREBOOL is called when production COMPAREBOOL is exited.
+func (s *BaseRuleListener) ExitCOMPAREBOOL(ctx *COMPAREBOOLContext) {}
 
-// EnterBoolStatement is called when production boolStatement is entered.
-func (s *BaseRuleListener) EnterBoolStatement(ctx *BoolStatementContext) {}
+// EnterBOOLOPX is called when production BOOLOPX is entered.
+func (s *BaseRuleListener) EnterBOOLOPX(ctx *BOOLOPXContext) {}
 
-// ExitBoolStatement is called when production boolStatement is exited.
-func (s *BaseRuleListener) ExitBoolStatement(ctx *BoolStatementContext) {}
+// ExitBOOLOPX is called when production BOOLOPX is exited.
+func (s *BaseRuleListener) ExitBOOLOPX(ctx *BOOLOPXContext) {}
+
+// EnterStatement is called when production statement is entered.
+func (s *BaseRuleListener) EnterStatement(ctx *StatementContext) {}
+
+// ExitStatement is called when production statement is exited.
+func (s *BaseRuleListener) ExitStatement(ctx *StatementContext) {}
 
 // EnterInit is called when production init is entered.
 func (s *BaseRuleListener) EnterInit(ctx *InitContext) {}

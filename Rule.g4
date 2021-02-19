@@ -11,6 +11,7 @@ boolOperate
     |OR
     |NOT
     ;
+
 IDENTIFY:[a-zA-Z_]+;
 
 GT:'>';
@@ -50,8 +51,9 @@ logical
     ;
 
 compareStatement
-    :calculateValue op=compare calculateValue #COMPARE
-    |calculateStatement #COMPAREX
+    :compareStatement op=compare compareStatement #COMPARE
+    |calculateValue #ITEMCOMP
+    |calculateStatement #Calcu
     |'(' compareStatement')' #COMPAREX
     ;
 
@@ -61,20 +63,19 @@ calculateValue
     ;
 
 calculateStatement
-    :calculateValue op=calculate calculateValue
-    |'(' calculateStatement')'
-    ;
-
-boolValue
-    :TRUE #BOOL
-    |FALSE #BOOL
-    |IDENTIFY # IDENBOOL
-    |compareStatement #COMPAREVALUE
+    :calculateStatement (op=(MUL|DIV) calculateStatement)+ #MULDIV
+    |calculateStatement (op=(ADD|SUB) calculateStatement)+ #ADDSUB
+    |calculateValue #ITEMCALCU
+    //|calculateValue (op=calculate calculateValue)+ #d
+    |'(' calculateStatement')' #CALCULATEX
     ;
 
 boolStatement
-    : boolValue op=boolOperate boolValue
-    |'(' boolStatement')'
+    : boolStatement op=boolOperate boolStatement #BOOLOP
+    |('true'|'false') #BOOL
+    |IDENTIFY #IDENBOOL
+    |compareStatement #COMPAREBOOL
+    |'(' boolStatement')' #BOOLOPX
     ;
 
 statement
