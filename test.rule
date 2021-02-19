@@ -1,1 +1,3 @@
-a and ((c+1)>=b)
+if b>c:
+e=b*2;
+end

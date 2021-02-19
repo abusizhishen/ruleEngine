@@ -6,6 +6,12 @@ AND:'and';
 OR:'or';
 NOT:'not';
 
+IF:'if';
+THEN:'then';
+ELIF:'elif';
+ELSE:'else';
+END:'end';
+
 boolOperate
     :AND
     |OR
@@ -78,9 +84,29 @@ boolStatement
     |'(' boolStatement')' #BOOLOPX
     ;
 
+
+valueType
+    :IDENTIFY
+    |NUM
+    |calculateStatement
+    ;
+setValueStatement
+    : IDENTIFY '=' valueType ';'
+    ;
+ifStatement:
+    IF boolStatement ':'
+        setValueStatement*
+    (ELIF boolStatement ':'
+        setValueStatement*) ?
+    (ELSE boolStatement ':'
+        setValueStatement*) ?
+    END
+    ;
+
 statement
     :boolStatement
     |compareStatement
     |calculateStatement
+    |ifStatement
     ;
 init:statement* EOF?;

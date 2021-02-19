@@ -135,6 +135,24 @@ func (s *BaseRuleListener) EnterBOOLOPX(ctx *BOOLOPXContext) {}
 // ExitBOOLOPX is called when production BOOLOPX is exited.
 func (s *BaseRuleListener) ExitBOOLOPX(ctx *BOOLOPXContext) {}
 
+// EnterValueType is called when production valueType is entered.
+func (s *BaseRuleListener) EnterValueType(ctx *ValueTypeContext) {}
+
+// ExitValueType is called when production valueType is exited.
+func (s *BaseRuleListener) ExitValueType(ctx *ValueTypeContext) {}
+
+// EnterSetValueStatement is called when production setValueStatement is entered.
+func (s *BaseRuleListener) EnterSetValueStatement(ctx *SetValueStatementContext) {}
+
+// ExitSetValueStatement is called when production setValueStatement is exited.
+func (s *BaseRuleListener) ExitSetValueStatement(ctx *SetValueStatementContext) {}
+
+// EnterIfStatement is called when production ifStatement is entered.
+func (s *BaseRuleListener) EnterIfStatement(ctx *IfStatementContext) {}
+
+// ExitIfStatement is called when production ifStatement is exited.
+func (s *BaseRuleListener) ExitIfStatement(ctx *IfStatementContext) {}
+
 // EnterStatement is called when production statement is entered.
 func (s *BaseRuleListener) EnterStatement(ctx *StatementContext) {}
 

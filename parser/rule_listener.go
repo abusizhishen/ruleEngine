@@ -65,6 +65,15 @@ type RuleListener interface {
 	// EnterBOOLOPX is called when entering the BOOLOPX production.
 	EnterBOOLOPX(c *BOOLOPXContext)
 
+	// EnterValueType is called when entering the valueType production.
+	EnterValueType(c *ValueTypeContext)
+
+	// EnterSetValueStatement is called when entering the setValueStatement production.
+	EnterSetValueStatement(c *SetValueStatementContext)
+
+	// EnterIfStatement is called when entering the ifStatement production.
+	EnterIfStatement(c *IfStatementContext)
+
 	// EnterStatement is called when entering the statement production.
 	EnterStatement(c *StatementContext)
 
@@ -127,6 +136,15 @@ type RuleListener interface {
 
 	// ExitBOOLOPX is called when exiting the BOOLOPX production.
 	ExitBOOLOPX(c *BOOLOPXContext)
+
+	// ExitValueType is called when exiting the valueType production.
+	ExitValueType(c *ValueTypeContext)
+
+	// ExitSetValueStatement is called when exiting the setValueStatement production.
+	ExitSetValueStatement(c *SetValueStatementContext)
+
+	// ExitIfStatement is called when exiting the ifStatement production.
+	ExitIfStatement(c *IfStatementContext)
 
 	// ExitStatement is called when exiting the statement production.
 	ExitStatement(c *StatementContext)

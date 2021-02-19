@@ -60,7 +60,8 @@ func (r *RuleEngineListening) ExitInit(ctx *parser.InitContext) {
 		return
 	}
 
-	fmt.Println("result:", r.pop())
+	fmt.Println("stack:", r.stack)
+	fmt.Println("out", r.output)
 }
 
 func (r *RuleEngineListening) ExitBOOLOP(ctx *parser.BOOLOPContext) {
@@ -183,4 +184,17 @@ func (r *RuleEngineListening) ExitIDENBOOL(ctx *parser.IDENBOOLContext) {
 
 	err := fmt.Errorf("invalid variable %s, value:%v, expect bool value", ctx.GetText(), v)
 	r.setError(err)
+}
+
+func (r *RuleEngineListening) ExitIfStatement(ctx *parser.IfStatementContext) {
+	fmt.Println("ExitIfStatement:", ctx.GetText())
+	fmt.Println("condition:", r.pop())
+
+}
+
+func (r *RuleEngineListening) ExitSetValueStatement(ctx *parser.SetValueStatementContext) {
+	fmt.Println("ExitSetValue:", ctx.GetText())
+	key := ctx.IDENTIFY().GetText()
+	r.output[key] = r.pop()
+	fmt.Println(fmt.Sprintf("%s=%v", key,r.output[key]))
 }
