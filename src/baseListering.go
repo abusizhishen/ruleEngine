@@ -8,8 +8,8 @@ import (
 
 type RuleEngineListening struct {
 	*parser.BaseRuleListener
-	input  map[string]interface{}
-	output map[string]interface{}
+	*parser.BaseRuleVisitor
+	data  map[string]interface{}
 	stack  []interface{}
 	errors []error
 }
@@ -37,12 +37,11 @@ func (r *RuleEngineListening) setError(e error) {
 func New(input map[string]interface{}) *RuleEngineListening {
 	var r = RuleEngineListening{
 		BaseRuleListener: new(parser.BaseRuleListener),
-		input:            make(map[string]interface{}),
-		output:           make(map[string]interface{}),
+		data:            make(map[string]interface{}),
 	}
 
 	for k, v := range input {
-		r.input[k] = v
+		r.data[k] = v
 	}
 
 	return &r
@@ -61,11 +60,11 @@ func (r *RuleEngineListening) ExitInit(ctx *parser.InitContext) {
 	}
 
 	fmt.Println("stack:", r.stack)
-	fmt.Println("out", r.output)
+	fmt.Println("out", r.data)
 }
 
 func (r *RuleEngineListening) ExitBOOLOP(ctx *parser.BOOLOPContext) {
-	fmt.Println(ctx.GetText())
+	fmt.Println("ExitBOOLOP",ctx.GetText())
 	right, left := r.pop(), r.pop()
 
 	switch ctx.GetOp().GetText() {
@@ -79,14 +78,16 @@ func (r *RuleEngineListening) ExitBOOLOP(ctx *parser.BOOLOPContext) {
 }
 
 func (r *RuleEngineListening) ExitCalculateValue(ctx *parser.CalculateValueContext) {
-	v := r.pop()
-	switch v.(type) {
-	case bool:
-		r.push(r)
-	default:
-		err := fmt.Errorf("invalid variable %s, value:%v, expect bool value", ctx.GetText(), v)
-		r.setError(err)
-	}
+	//fmt.Println("ExitCalculateValue: ", ctx.GetText())
+	//
+	//v := r.pop()
+	//switch v.(type) {
+	//case bool:
+	//	r.push(r)
+	//default:
+	//	err := fmt.Errorf("invalid variable %s, value:%v, expect bool value", ctx.GetText(), v)
+	//	r.setError(err)
+	//}
 }
 
 func (r *RuleEngineListening) ExitCOMPARE(ctx *parser.COMPAREContext) {
@@ -116,6 +117,9 @@ func (r *RuleEngineListening) ExitMULDIV(ctx *parser.MULDIVContext) {
 	case "*":
 		r.push(left * right)
 	case "/":
+		if right == 0 {
+			r.setError(fmt.Errorf("被除数不能为0"))
+		}
 		r.push(left / right)
 	default:
 
@@ -136,8 +140,9 @@ func (r *RuleEngineListening) ExitADDSUB(ctx *parser.ADDSUBContext) {
 	}
 }
 
-func (r *RuleEngineListening) ExitIDEN(ctx *parser.IDENContext) {
-	v, ok := r.input[ctx.GetText()]
+func (r *RuleEngineListening) ExitIDENTIFY(ctx *parser.IDENTIFYContext) {
+	fmt.Println("ExitIDEN: ", ctx.GetText())
+	v, ok := r.data[ctx.GetText()]
 	if !ok {
 		err := fmt.Errorf("invalid variable %s", ctx.GetText())
 		r.setError(err)
@@ -169,7 +174,7 @@ func (r *RuleEngineListening) ExitBOOL(ctx *parser.BOOLContext) {
 }
 
 func (r *RuleEngineListening) ExitIDENBOOL(ctx *parser.IDENBOOLContext) {
-	v, ok := r.input[ctx.GetText()]
+	v, ok := r.data[ctx.GetText()]
 	if !ok {
 		err := fmt.Errorf("invalid variable %s", ctx.GetText())
 		r.setError(err)
@@ -195,6 +200,8 @@ func (r *RuleEngineListening) ExitIfStatement(ctx *parser.IfStatementContext) {
 func (r *RuleEngineListening) ExitSetValueStatement(ctx *parser.SetValueStatementContext) {
 	fmt.Println("ExitSetValue:", ctx.GetText())
 	key := ctx.IDENTIFY().GetText()
-	r.output[key] = r.pop()
-	fmt.Println(fmt.Sprintf("%s=%v", key,r.output[key]))
+	ctx.ValueType()
+	r.data[key] = r.pop()
+	r.push(r.data[key])
+	fmt.Println(fmt.Sprintf("%s=%v", key,r.data[key]))
 }

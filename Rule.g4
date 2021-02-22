@@ -1,5 +1,5 @@
 grammar Rule;
-NUM:[0-9]+;
+NUM:[0-9]+ ;
 NOW:'now()';
 
 AND:'and';
@@ -47,6 +47,7 @@ compare
     |LTE
     |LT
     ;
+
 TRUE:'true';
 FALSE:'false';
 
@@ -63,16 +64,18 @@ compareStatement
     |'(' compareStatement')' #COMPAREX
     ;
 
+num:NUM#NUM;
+identify:IDENTIFY#IDENTIFY;
+
 calculateValue
-    :IDENTIFY #IDEN
-    |NUM #NUM
+    :identify
+    |num
     ;
 
 calculateStatement
     :calculateStatement (op=(MUL|DIV) calculateStatement)+ #MULDIV
     |calculateStatement (op=(ADD|SUB) calculateStatement)+ #ADDSUB
     |calculateValue #ITEMCALCU
-    //|calculateValue (op=calculate calculateValue)+ #d
     |'(' calculateStatement')' #CALCULATEX
     ;
 
@@ -84,21 +87,20 @@ boolStatement
     |'(' boolStatement')' #BOOLOPX
     ;
 
-
 valueType
-    :IDENTIFY
-    |NUM
+    :identify
+    |num
     |calculateStatement
     ;
 setValueStatement
-    : IDENTIFY '=' valueType ';'
+    : IDENTIFY '=' valueType ';'?
     ;
 ifStatement:
     IF boolStatement ':'
         setValueStatement*
     (ELIF boolStatement ':'
         setValueStatement*) ?
-    (ELSE boolStatement ':'
+    (ELSE ':'
         setValueStatement*) ?
     END
     ;
@@ -108,5 +110,6 @@ statement
     |compareStatement
     |calculateStatement
     |ifStatement
+    |setValueStatement
     ;
 init:statement* EOF?;

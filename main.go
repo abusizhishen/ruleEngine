@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	input, err := antlr.NewFileStream("test.rule")
+	input, err := antlr.NewFileStream("test.ru")
 	if err != nil {
 		panic(err)
 	}

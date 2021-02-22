@@ -32,11 +32,14 @@ type RuleListener interface {
 	// EnterITEMCOMP is called when entering the ITEMCOMP production.
 	EnterITEMCOMP(c *ITEMCOMPContext)
 
-	// EnterIDEN is called when entering the IDEN production.
-	EnterIDEN(c *IDENContext)
-
 	// EnterNUM is called when entering the NUM production.
 	EnterNUM(c *NUMContext)
+
+	// EnterIDENTIFY is called when entering the IDENTIFY production.
+	EnterIDENTIFY(c *IDENTIFYContext)
+
+	// EnterCalculateValue is called when entering the calculateValue production.
+	EnterCalculateValue(c *CalculateValueContext)
 
 	// EnterITEMCALCU is called when entering the ITEMCALCU production.
 	EnterITEMCALCU(c *ITEMCALCUContext)
@@ -104,11 +107,14 @@ type RuleListener interface {
 	// ExitITEMCOMP is called when exiting the ITEMCOMP production.
 	ExitITEMCOMP(c *ITEMCOMPContext)
 
-	// ExitIDEN is called when exiting the IDEN production.
-	ExitIDEN(c *IDENContext)
-
 	// ExitNUM is called when exiting the NUM production.
 	ExitNUM(c *NUMContext)
+
+	// ExitIDENTIFY is called when exiting the IDENTIFY production.
+	ExitIDENTIFY(c *IDENTIFYContext)
+
+	// ExitCalculateValue is called when exiting the calculateValue production.
+	ExitCalculateValue(c *CalculateValueContext)
 
 	// ExitITEMCALCU is called when exiting the ITEMCALCU production.
 	ExitITEMCALCU(c *ITEMCALCUContext)

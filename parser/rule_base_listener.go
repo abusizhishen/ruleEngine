@@ -69,17 +69,23 @@ func (s *BaseRuleListener) EnterITEMCOMP(ctx *ITEMCOMPContext) {}
 // ExitITEMCOMP is called when production ITEMCOMP is exited.
 func (s *BaseRuleListener) ExitITEMCOMP(ctx *ITEMCOMPContext) {}
 
-// EnterIDEN is called when production IDEN is entered.
-func (s *BaseRuleListener) EnterIDEN(ctx *IDENContext) {}
-
-// ExitIDEN is called when production IDEN is exited.
-func (s *BaseRuleListener) ExitIDEN(ctx *IDENContext) {}
-
 // EnterNUM is called when production NUM is entered.
 func (s *BaseRuleListener) EnterNUM(ctx *NUMContext) {}
 
 // ExitNUM is called when production NUM is exited.
 func (s *BaseRuleListener) ExitNUM(ctx *NUMContext) {}
+
+// EnterIDENTIFY is called when production IDENTIFY is entered.
+func (s *BaseRuleListener) EnterIDENTIFY(ctx *IDENTIFYContext) {}
+
+// ExitIDENTIFY is called when production IDENTIFY is exited.
+func (s *BaseRuleListener) ExitIDENTIFY(ctx *IDENTIFYContext) {}
+
+// EnterCalculateValue is called when production calculateValue is entered.
+func (s *BaseRuleListener) EnterCalculateValue(ctx *CalculateValueContext) {}
+
+// ExitCalculateValue is called when production calculateValue is exited.
+func (s *BaseRuleListener) ExitCalculateValue(ctx *CalculateValueContext) {}
 
 // EnterITEMCALCU is called when production ITEMCALCU is entered.
 func (s *BaseRuleListener) EnterITEMCALCU(ctx *ITEMCALCUContext) {}
