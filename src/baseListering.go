@@ -77,19 +77,6 @@ func (r *RuleEngineListening) ExitBOOLOP(ctx *parser.BOOLOPContext) {
 	}
 }
 
-func (r *RuleEngineListening) ExitCalculateValue(ctx *parser.CalculateValueContext) {
-	//fmt.Println("ExitCalculateValue: ", ctx.GetText())
-	//
-	//v := r.pop()
-	//switch v.(type) {
-	//case bool:
-	//	r.push(r)
-	//default:
-	//	err := fmt.Errorf("invalid variable %s, value:%v, expect bool value", ctx.GetText(), v)
-	//	r.setError(err)
-	//}
-}
-
 func (r *RuleEngineListening) ExitCOMPARE(ctx *parser.COMPAREContext) {
 	fmt.Println("ExitCompare: ", ctx.GetText())
 	right, left := r.pop().(int), r.pop().(int)
