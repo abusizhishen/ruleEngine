@@ -77,6 +77,15 @@ type RuleVisitor interface {
 	// Visit a parse tree produced by RuleParser#ifStatement.
 	VisitIfStatement(ctx *IfStatementContext) interface{}
 
+	// Visit a parse tree produced by RuleParser#elseIfStatement.
+	VisitElseIfStatement(ctx *ElseIfStatementContext) interface{}
+
+	// Visit a parse tree produced by RuleParser#elseStatement.
+	VisitElseStatement(ctx *ElseStatementContext) interface{}
+
+	// Visit a parse tree produced by RuleParser#returnStatement.
+	VisitReturnStatement(ctx *ReturnStatementContext) interface{}
+
 	// Visit a parse tree produced by RuleParser#statement.
 	VisitStatement(ctx *StatementContext) interface{}
 

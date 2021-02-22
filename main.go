@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/abusizhishen/ruleEngine/parser"
 	"github.com/abusizhishen/ruleEngine/src"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
@@ -21,8 +22,9 @@ func main() {
 	tokens := antlr.NewCommonTokenStream(lex, antlr.TokenDefaultChannel)
 
 	p := parser.NewRuleParser(tokens)
-
-	antlr.ParseTreeWalkerDefault.Walk(src.New(data), p.Init())
+	v := src.NewVisitor(data)
+	result := p.Init().Accept(v)
+	fmt.Println("result: ", result)
 }
 
 var data = map[string]interface{}{"a": true, "b": 1, "c": 0}

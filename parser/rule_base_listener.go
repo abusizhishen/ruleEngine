@@ -159,6 +159,24 @@ func (s *BaseRuleListener) EnterIfStatement(ctx *IfStatementContext) {}
 // ExitIfStatement is called when production ifStatement is exited.
 func (s *BaseRuleListener) ExitIfStatement(ctx *IfStatementContext) {}
 
+// EnterElseIfStatement is called when production elseIfStatement is entered.
+func (s *BaseRuleListener) EnterElseIfStatement(ctx *ElseIfStatementContext) {}
+
+// ExitElseIfStatement is called when production elseIfStatement is exited.
+func (s *BaseRuleListener) ExitElseIfStatement(ctx *ElseIfStatementContext) {}
+
+// EnterElseStatement is called when production elseStatement is entered.
+func (s *BaseRuleListener) EnterElseStatement(ctx *ElseStatementContext) {}
+
+// ExitElseStatement is called when production elseStatement is exited.
+func (s *BaseRuleListener) ExitElseStatement(ctx *ElseStatementContext) {}
+
+// EnterReturnStatement is called when production returnStatement is entered.
+func (s *BaseRuleListener) EnterReturnStatement(ctx *ReturnStatementContext) {}
+
+// ExitReturnStatement is called when production returnStatement is exited.
+func (s *BaseRuleListener) ExitReturnStatement(ctx *ReturnStatementContext) {}
+
 // EnterStatement is called when production statement is entered.
 func (s *BaseRuleListener) EnterStatement(ctx *StatementContext) {}
 

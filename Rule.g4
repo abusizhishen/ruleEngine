@@ -2,9 +2,9 @@ grammar Rule;
 NUM:[0-9]+ ;
 NOW:'now()';
 
-AND:'and';
-OR:'or';
-NOT:'not';
+AND:'&&';
+OR:'||';
+NOT:'!';
 
 IF:'if';
 ELSIF:'elsif';
@@ -112,12 +112,18 @@ elseStatement:
     statement*
 '}';
 
+returnStatement:
+    'return'
+        boolStatement|calculateStatement|valueType
+    ;
+
 statement
     :boolStatement
     |compareStatement
     |calculateStatement
     |ifStatement
     |setValueStatement
+    |returnStatement
     ;
 
 init:statement* EOF;

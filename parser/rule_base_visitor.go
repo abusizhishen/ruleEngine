@@ -100,6 +100,18 @@ func (v *BaseRuleVisitor) VisitIfStatement(ctx *IfStatementContext) interface{} 
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRuleVisitor) VisitElseIfStatement(ctx *ElseIfStatementContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRuleVisitor) VisitElseStatement(ctx *ElseStatementContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRuleVisitor) VisitReturnStatement(ctx *ReturnStatementContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRuleVisitor) VisitStatement(ctx *StatementContext) interface{} {
 	return v.VisitChildren(ctx)
 }

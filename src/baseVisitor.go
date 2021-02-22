@@ -13,22 +13,22 @@ type RuleEngineVisitor struct {
 	errors []error
 }
 
-func (r *RuleEngineVisitor) pop() interface{} {
-	if len(r.stack) == 0 {
+func (v *RuleEngineVisitor) pop() interface{} {
+	if len(v.stack) == 0 {
 		panic("stack is empty")
 	}
 
-	l := len(r.stack)
-	v := r.stack[l-1]
-	r.stack = r.stack[:len(r.stack)-1]
-	return v
+	l := len(v.stack)
+	vv := v.stack[l-1]
+	v.stack = v.stack[:len(v.stack)-1]
+	return vv
 }
 
-func (r *RuleEngineVisitor) push(i interface{}) {
-	r.stack = append(r.stack, i)
+func (v *RuleEngineVisitor) push(i interface{}) {
+	v.stack = append(v.stack, i)
 }
 
-func (r *RuleEngineVisitor) setError(e error) {
+func (v *RuleEngineVisitor) setError(e error) {
 	//r.errors = append(r.errors, e)
 	panic(e.Error())
 }
@@ -46,86 +46,78 @@ func NewVisitor(input map[string]interface{}) *RuleEngineVisitor {
 	return &r
 }
 
-func (r *RuleEngineVisitor) EnterInit(ctx *parser.InitContext) {
-	fmt.Println("EnterInit: ", ctx.GetText())
-}
+func (v *RuleEngineVisitor) VisitInit(ctx *parser.InitContext) interface{} {
+	fmt.Println("VisitInit:", ctx.GetText())
 
-func (r *RuleEngineVisitor) VisitInit(ctx *parser.InitContext) interface{} {
-	if len(r.errors) != 0 {
-		for _, e := range r.errors {
-			fmt.Println(e)
-		}
-		return nil
+	for _, statement := range ctx.AllStatement() {
+		statement.Accept(v)
 	}
 
-	fmt.Println("stack:", r.stack)
-	fmt.Println("out", r.data)
-
-	return nil
+	return v.stack
 }
 
-func (r *RuleEngineVisitor) VisitBOOLOP(ctx *parser.BOOLOPContext) interface{} {
+func (v *RuleEngineVisitor) VisitBOOLOP(ctx *parser.BOOLOPContext) interface{} {
 	fmt.Println("VisitBOOLOP", ctx.GetText())
-	right, left := r.pop(), r.pop()
+	right, left := v.pop(), v.pop()
 
 	switch ctx.GetOp().GetText() {
-	case "and":
-		r.push(left.(bool) && right.(bool))
-	case "or":
-		r.push(left.(bool) || right.(bool))
-	case "not":
-		r.push(left.(bool) && (!right.(bool)))
+	case "&&":
+		v.push(left.(bool) && right.(bool))
+	case "||":
+		v.push(left.(bool) || right.(bool))
+	case "!":
+		v.push(left.(bool) && (!right.(bool)))
 	}
 
 	return nil
 }
 
-func (r *RuleEngineVisitor) VisitCOMPARE(ctx *parser.COMPAREContext) interface{} {
+func (v *RuleEngineVisitor) VisitCOMPARE(ctx *parser.COMPAREContext) interface{} {
 	fmt.Println("VisitCompare: ", ctx.GetText())
-	right, left := r.pop().(int), r.pop().(int)
+	right, left := v.pop().(int), v.pop().(int)
 
 	switch ctx.GetOp().GetText() {
 	case ">=":
-		r.push(left >= right)
+		v.push(left >= right)
 	case ">":
-		r.push(left > right)
+		v.push(left > right)
 	case "==":
-		r.push(left == right)
+		v.push(left == right)
 	case "<=":
-		r.push(left <= right)
+		v.push(left <= right)
 	case "<":
-		r.push(left < right)
+		v.push(left < right)
 	}
 	return nil
 }
 
-func (r *RuleEngineVisitor) VisitMULDIV(ctx *parser.MULDIVContext) interface{} {
+func (v *RuleEngineVisitor) VisitMULDIV(ctx *parser.MULDIVContext) interface{} {
 	fmt.Println("VisitMULDIV: ", ctx.GetText())
-	right, left := r.pop().(int), r.pop().(int)
+	right, left := v.pop().(int), v.pop().(int)
 
 	switch ctx.GetOp().GetText() {
 	case "*":
-		r.push(left * right)
+		v.push(left * right)
 	case "/":
 		if right == 0 {
-			r.setError(fmt.Errorf("被除数不能为0"))
+			v.setError(fmt.Errorf("被除数不能为0"))
 		}
-		r.push(left / right)
+		v.push(left / right)
 	default:
 
 	}
 	return nil
 }
 
-func (r *RuleEngineVisitor) VisitADDSUB(ctx *parser.ADDSUBContext) interface{} {
+func (v *RuleEngineVisitor) VisitADDSUB(ctx *parser.ADDSUBContext) interface{} {
 	fmt.Println("VisitADDSUB: ", ctx.GetText())
-	right, left := r.pop().(int), r.pop().(int)
+	right, left := v.pop().(int), v.pop().(int)
 
 	switch ctx.GetOp().GetText() {
 	case "+":
-		r.push(left + right)
+		v.push(left + right)
 	case "-":
-		r.push(left - right)
+		v.push(left - right)
 	default:
 
 	}
@@ -133,76 +125,132 @@ func (r *RuleEngineVisitor) VisitADDSUB(ctx *parser.ADDSUBContext) interface{} {
 	return nil
 }
 
-func (r *RuleEngineVisitor) VisitIDENTIFY(ctx *parser.IDENTIFYContext) interface{} {
-	fmt.Println("VisitIDEN: ", ctx.GetText())
-	v, ok := r.data[ctx.GetText()]
+func (v *RuleEngineVisitor) VisitIDENTIFY(ctx *parser.IDENTIFYContext) interface{} {
+	fmt.Println("VisitIDENTIFY: ", ctx.GetText())
+	vv, ok := v.data[ctx.GetText()]
 	if !ok {
 		err := fmt.Errorf("invalid variable %s", ctx.GetText())
-		r.setError(err)
+		v.setError(err)
 		return nil
 	}
 
-	r.push(v)
+	v.push(vv)
 
 	return nil
 }
 
-func (r *RuleEngineVisitor) VisitNUM(ctx *parser.NUMContext) interface{} {
+func (v *RuleEngineVisitor) VisitNUM(ctx *parser.NUMContext) interface{} {
+	fmt.Println("VisitNUM:", ctx.GetText())
+
 	str := ctx.GetText()
 	va, err := strconv.Atoi(str)
 	if err == nil {
-		r.push(va)
+		v.push(va)
 		return nil
 	}
 
 	err = fmt.Errorf("invalid num %s, err:%v", str, err)
-	r.setError(err)
+	v.setError(err)
 	return nil
 }
 
-func (r *RuleEngineVisitor) VisitBOOL(ctx *parser.BOOLContext) interface{} {
+func (v *RuleEngineVisitor) VisitBOOL(ctx *parser.BOOLContext) interface{} {
+	fmt.Println("VisitBOOL:", ctx.GetText())
+
 	switch ctx.GetText() {
 	case "true":
-		r.push(true)
+		v.push(true)
 	case "false":
-		r.push(false)
+		v.push(false)
 	}
 	return nil
 
 }
 
-func (r *RuleEngineVisitor) VisitIDENBOOL(ctx *parser.IDENBOOLContext) interface{} {
-	v, ok := r.data[ctx.GetText()]
+func (v *RuleEngineVisitor) VisitIDENBOOL(ctx *parser.IDENBOOLContext) interface{} {
+	fmt.Println("VisitIDENBOOL:", ctx.GetText())
+
+	vv, ok := v.data[ctx.GetText()]
 	if !ok {
 		err := fmt.Errorf("invalid variable %s", ctx.GetText())
-		r.setError(err)
+		v.setError(err)
 		return nil
 	}
 
-	va, ok := v.(bool)
+	va, ok := vv.(bool)
 	if ok {
-		r.push(va)
+		v.push(va)
 		return nil
 	}
 
 	err := fmt.Errorf("invalid variable %s, value:%v, expect bool value", ctx.GetText(), v)
-	r.setError(err)
+	v.setError(err)
 	return nil
 }
 
-func (r *RuleEngineVisitor) VisitIfStatement(ctx *parser.IfStatementContext) interface{} {
+func (v *RuleEngineVisitor) VisitIfStatement(ctx *parser.IfStatementContext) interface{} {
 	fmt.Println("VisitIfStatement:", ctx.GetText())
-	fmt.Println("condition:", r.pop())
+	fmt.Println("condition:", v.pop())
 	return nil
 }
 
-func (r *RuleEngineVisitor) VisitSetValueStatement(ctx *parser.SetValueStatementContext) interface{} {
+func (v *RuleEngineVisitor) VisitSetValueStatement(ctx *parser.SetValueStatementContext) interface{} {
 	fmt.Println("VisitSetValue:", ctx.GetText())
+	ctx.ValueType().Accept(v)
 	key := ctx.IDENTIFY().GetText()
-	ctx.ValueType()
-	r.data[key] = r.pop()
-	r.push(r.data[key])
-	fmt.Println(fmt.Sprintf("%s=%v", key, r.data[key]))
+	v.data[key] = v.pop()
+	v.push(v.data[key])
+	fmt.Println(fmt.Sprintf("%s=%v", key, v.data[key]))
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitStatement(ctx *parser.StatementContext) interface{} {
+	fmt.Println("VisitStatement:", ctx.GetText())
+
+	for i := 0; i < ctx.GetChildCount(); i++ {
+		ctx.GetChildOfType(i, nil).Accept(v)
+	}
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitValueType(ctx *parser.ValueTypeContext) interface{} {
+	fmt.Println("VisitCalculate:", ctx.GetText())
+
+	for i := 0; i < ctx.GetChildCount(); i++ {
+		ctx.GetChildOfType(i, nil).Accept(v)
+	}
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitCalculate(ctx *parser.CalculateContext) interface{} {
+	fmt.Println("VisitCalculate:", ctx.GetText())
+
+	for i := 0; i < ctx.GetChildCount(); i++ {
+		ctx.GetChildOfType(i, nil).Accept(v)
+	}
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitITEMCALCU(ctx *parser.ITEMCALCUContext) interface{} {
+	fmt.Println("VisitITEMCALCU:", ctx.GetText())
+
+	for i := 0; i < ctx.GetChildCount(); i++ {
+		ctx.GetChildOfType(i, nil).Accept(v)
+	}
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitReturnStatement(ctx *parser.ReturnStatementContext) interface{} {
+	fmt.Println("VisitReturnStatement:", ctx.GetText())
+
+	for i := 0; i < ctx.GetChildCount(); i++ {
+		ctx.GetChildOfType(i, nil).Accept(v)
+	}
 
 	return nil
 }
