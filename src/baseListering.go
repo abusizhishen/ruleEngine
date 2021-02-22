@@ -9,7 +9,7 @@ import (
 type RuleEngineListening struct {
 	*parser.BaseRuleListener
 	*parser.BaseRuleVisitor
-	data  map[string]interface{}
+	data   map[string]interface{}
 	stack  []interface{}
 	errors []error
 }
@@ -37,7 +37,7 @@ func (r *RuleEngineListening) setError(e error) {
 func New(input map[string]interface{}) *RuleEngineListening {
 	var r = RuleEngineListening{
 		BaseRuleListener: new(parser.BaseRuleListener),
-		data:            make(map[string]interface{}),
+		data:             make(map[string]interface{}),
 	}
 
 	for k, v := range input {
@@ -64,7 +64,7 @@ func (r *RuleEngineListening) ExitInit(ctx *parser.InitContext) {
 }
 
 func (r *RuleEngineListening) ExitBOOLOP(ctx *parser.BOOLOPContext) {
-	fmt.Println("ExitBOOLOP",ctx.GetText())
+	fmt.Println("ExitBOOLOP", ctx.GetText())
 	right, left := r.pop(), r.pop()
 
 	switch ctx.GetOp().GetText() {
@@ -190,5 +190,5 @@ func (r *RuleEngineListening) ExitSetValueStatement(ctx *parser.SetValueStatemen
 	ctx.ValueType()
 	r.data[key] = r.pop()
 	r.push(r.data[key])
-	fmt.Println(fmt.Sprintf("%s=%v", key,r.data[key]))
+	fmt.Println(fmt.Sprintf("%s=%v", key, r.data[key]))
 }
