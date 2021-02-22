@@ -7,10 +7,8 @@ OR:'or';
 NOT:'not';
 
 IF:'if';
-THEN:'then';
-ELIF:'elif';
+ELSIF:'elsif';
 ELSE:'else';
-END:'end';
 
 boolOperate
     :AND
@@ -95,15 +93,24 @@ valueType
 setValueStatement
     : IDENTIFY '=' valueType ';'?
     ;
+
 ifStatement:
-    IF boolStatement ':'
-        setValueStatement*
-    (ELIF boolStatement ':'
-        setValueStatement*) ?
-    (ELSE ':'
-        setValueStatement*) ?
-    END
+    IF boolStatement '{'
+        statement*
+    '}'
+    elseIfStatement*
+    elseStatement?
     ;
+
+elseIfStatement:
+    ELSIF boolStatement '{'
+        statement*
+'}';
+
+elseStatement:
+    ELSE '{'
+    statement*
+'}';
 
 statement
     :boolStatement
@@ -112,4 +119,5 @@ statement
     |ifStatement
     |setValueStatement
     ;
-init:statement* EOF?;
+
+init:statement* EOF;
