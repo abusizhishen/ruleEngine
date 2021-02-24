@@ -92,8 +92,8 @@ var parserATN = []uint16{
 	164, 3, 2, 2, 2, 167, 168, 7, 8, 2, 2, 168, 31, 3, 2, 2, 2, 169, 170, 7,
 	9, 2, 2, 170, 174, 5, 20, 11, 2, 171, 174, 5, 18, 10, 2, 172, 174, 5, 22,
 	12, 2, 173, 169, 3, 2, 2, 2, 173, 171, 3, 2, 2, 2, 173, 172, 3, 2, 2, 2,
-	174, 33, 3, 2, 2, 2, 175, 182, 5, 20, 11, 2, 176, 182, 5, 10, 6, 2, 177,
-	182, 5, 18, 10, 2, 178, 182, 5, 26, 14, 2, 179, 182, 5, 24, 13, 2, 180,
+	174, 33, 3, 2, 2, 2, 175, 182, 5, 18, 10, 2, 176, 182, 5, 20, 11, 2, 177,
+	182, 5, 10, 6, 2, 178, 182, 5, 26, 14, 2, 179, 182, 5, 24, 13, 2, 180,
 	182, 5, 32, 17, 2, 181, 175, 3, 2, 2, 2, 181, 176, 3, 2, 2, 2, 181, 177,
 	3, 2, 2, 2, 181, 178, 3, 2, 2, 2, 181, 179, 3, 2, 2, 2, 181, 180, 3, 2,
 	2, 2, 182, 35, 3, 2, 2, 2, 183, 185, 5, 34, 18, 2, 184, 183, 3, 2, 2, 2,
@@ -3215,6 +3215,12 @@ type IReturnStatementContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
+	// GetValue returns the value rule contexts.
+	GetValue() IBoolStatementContext
+
+	// SetValue sets the value rule contexts.
+	SetValue(IBoolStatementContext)
+
 	// IsReturnStatementContext differentiates from other interfaces.
 	IsReturnStatementContext()
 }
@@ -3222,6 +3228,7 @@ type IReturnStatementContext interface {
 type ReturnStatementContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
+	value  IBoolStatementContext
 }
 
 func NewEmptyReturnStatementContext() *ReturnStatementContext {
@@ -3245,6 +3252,10 @@ func NewReturnStatementContext(parser antlr.Parser, parent antlr.ParserRuleConte
 }
 
 func (s *ReturnStatementContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ReturnStatementContext) GetValue() IBoolStatementContext { return s.value }
+
+func (s *ReturnStatementContext) SetValue(v IBoolStatementContext) { s.value = v }
 
 func (s *ReturnStatementContext) BoolStatement() IBoolStatementContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolStatementContext)(nil)).Elem(), 0)
@@ -3337,7 +3348,10 @@ func (p *RuleParser) ReturnStatement() (localctx IReturnStatementContext) {
 		}
 		{
 			p.SetState(168)
-			p.boolStatement(0)
+
+			var _x = p.boolStatement(0)
+
+			localctx.(*ReturnStatementContext).value = _x
 		}
 
 	case 2:
@@ -3397,6 +3411,16 @@ func NewStatementContext(parser antlr.Parser, parent antlr.ParserRuleContext, in
 
 func (s *StatementContext) GetParser() antlr.Parser { return s.parser }
 
+func (s *StatementContext) CalculateStatement() ICalculateStatementContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ICalculateStatementContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(ICalculateStatementContext)
+}
+
 func (s *StatementContext) BoolStatement() IBoolStatementContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolStatementContext)(nil)).Elem(), 0)
 
@@ -3415,16 +3439,6 @@ func (s *StatementContext) CompareStatement() ICompareStatementContext {
 	}
 
 	return t.(ICompareStatementContext)
-}
-
-func (s *StatementContext) CalculateStatement() ICalculateStatementContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ICalculateStatementContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(ICalculateStatementContext)
 }
 
 func (s *StatementContext) IfStatement() IIfStatementContext {
@@ -3514,21 +3528,21 @@ func (p *RuleParser) Statement() (localctx IStatementContext) {
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(173)
-			p.boolStatement(0)
+			p.calculateStatement(0)
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(174)
-			p.compareStatement(0)
+			p.boolStatement(0)
 		}
 
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
 			p.SetState(175)
-			p.calculateStatement(0)
+			p.compareStatement(0)
 		}
 
 	case 4:

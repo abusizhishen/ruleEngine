@@ -1,5 +1,8 @@
 a=3
 b=4
 
-
-a+b
+if a> b{
+    return a*2
+}else{
+    return a
+}

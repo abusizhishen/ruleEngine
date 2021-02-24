@@ -11,6 +11,9 @@ type RuleEngineVisitor struct {
 	data   map[string]interface{}
 	stack  []interface{}
 	errors []error
+
+	Info  bool
+	Error bool
 }
 
 func (v *RuleEngineVisitor) pop() interface{} {
@@ -71,9 +74,22 @@ func (v *RuleEngineVisitor) VisitBOOLOP(ctx *parser.BOOLOPContext) interface{} {
 
 	return nil
 }
+func (v *RuleEngineVisitor) VisitCOMPAREX(ctx *parser.COMPAREXContext) interface{} {
+	fmt.Println("VisitCOMPAREX", ctx.GetText())
+	ctx.CompareStatement().Accept(v)
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitCalcu(ctx *parser.CalcuContext) interface{} {
+	fmt.Println("VisitCalcu", ctx.GetText())
+	ctx.CalculateStatement().Accept(v)
+	return nil
+}
 
 func (v *RuleEngineVisitor) VisitCOMPARE(ctx *parser.COMPAREContext) interface{} {
-	fmt.Println("VisitCompare: ", ctx.GetText())
+	fmt.Println("VisitCOMPARE: ", ctx.GetText())
+	ctx.CompareStatement(0).Accept(v)
+	ctx.CompareStatement(1).Accept(v)
 	right, left := v.pop().(int), v.pop().(int)
 
 	switch ctx.GetOp().GetText() {
@@ -93,6 +109,8 @@ func (v *RuleEngineVisitor) VisitCOMPARE(ctx *parser.COMPAREContext) interface{}
 
 func (v *RuleEngineVisitor) VisitMULDIV(ctx *parser.MULDIVContext) interface{} {
 	fmt.Println("VisitMULDIV: ", ctx.GetText())
+	ctx.CalculateStatement(0).Accept(v)
+	ctx.CalculateStatement(1).Accept(v)
 	right, left := v.pop().(int), v.pop().(int)
 
 	switch ctx.GetOp().GetText() {
@@ -104,13 +122,16 @@ func (v *RuleEngineVisitor) VisitMULDIV(ctx *parser.MULDIVContext) interface{} {
 		}
 		v.push(left / right)
 	default:
-
+		panic("invalid op: " + ctx.GetOp().GetText())
 	}
 	return nil
 }
 
 func (v *RuleEngineVisitor) VisitADDSUB(ctx *parser.ADDSUBContext) interface{} {
 	fmt.Println("VisitADDSUB: ", ctx.GetText())
+	ctx.CalculateStatement(0).Accept(v)
+	ctx.CalculateStatement(1).Accept(v)
+
 	right, left := v.pop().(int), v.pop().(int)
 
 	switch ctx.GetOp().GetText() {
@@ -119,7 +140,7 @@ func (v *RuleEngineVisitor) VisitADDSUB(ctx *parser.ADDSUBContext) interface{} {
 	case "-":
 		v.push(left - right)
 	default:
-
+		panic("invalid op: " + ctx.GetOp().GetText())
 	}
 
 	return nil
@@ -190,7 +211,17 @@ func (v *RuleEngineVisitor) VisitIDENBOOL(ctx *parser.IDENBOOLContext) interface
 
 func (v *RuleEngineVisitor) VisitIfStatement(ctx *parser.IfStatementContext) interface{} {
 	fmt.Println("VisitIfStatement:", ctx.GetText())
-	fmt.Println("condition:", v.pop())
+	ctx.BoolStatement().Accept(v)
+
+	if v.pop().(bool) {
+		for _, statement := range ctx.AllStatement() {
+			statement.Accept(v)
+		}
+
+	} else {
+		ctx.ElseStatement().Accept(v)
+	}
+
 	return nil
 }
 
@@ -199,7 +230,6 @@ func (v *RuleEngineVisitor) VisitSetValueStatement(ctx *parser.SetValueStatement
 	ctx.ValueType().Accept(v)
 	key := ctx.IDENTIFY().GetText()
 	v.data[key] = v.pop()
-	v.push(v.data[key])
 	fmt.Println(fmt.Sprintf("%s=%v", key, v.data[key]))
 
 	return nil
@@ -209,7 +239,21 @@ func (v *RuleEngineVisitor) VisitStatement(ctx *parser.StatementContext) interfa
 	fmt.Println("VisitStatement:", ctx.GetText())
 
 	for i := 0; i < ctx.GetChildCount(); i++ {
-		ctx.GetChildOfType(i, nil).Accept(v)
+		child := ctx.GetChildOfType(i, nil)
+
+		//ty := reflect.TypeOf(child)
+		//fmt.Println(ty.String(), ty.Name())
+		child.Accept(v)
+	}
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitElseStatement(ctx *parser.ElseStatementContext) interface{} {
+	fmt.Println("VisitElseStatement:", ctx.GetText())
+
+	for _, statement := range ctx.AllStatement() {
+		statement.Accept(v)
 	}
 
 	return nil
@@ -222,6 +266,12 @@ func (v *RuleEngineVisitor) VisitValueType(ctx *parser.ValueTypeContext) interfa
 		ctx.GetChildOfType(i, nil).Accept(v)
 	}
 
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitCOMPAREBOOL(ctx *parser.COMPAREBOOLContext) interface{} {
+	fmt.Println("VisitCOMPAREBOOL:", ctx.GetText())
+	ctx.CompareStatement().Accept(v)
 	return nil
 }
 
@@ -239,7 +289,33 @@ func (v *RuleEngineVisitor) VisitITEMCALCU(ctx *parser.ITEMCALCUContext) interfa
 	fmt.Println("VisitITEMCALCU:", ctx.GetText())
 
 	for i := 0; i < ctx.GetChildCount(); i++ {
+		//fmt.Println(reflect.TypeOf(ctx.GetChild(i)).String())
 		ctx.GetChildOfType(i, nil).Accept(v)
+
+	}
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitITEMCOMP(ctx *parser.ITEMCOMPContext) interface{} {
+	fmt.Println("VisitITEMCOMP:", ctx.GetText())
+
+	for i := 0; i < ctx.GetChildCount(); i++ {
+		//fmt.Println(reflect.TypeOf(ctx.GetChild(i)).String())
+		ctx.GetChildOfType(i, nil).Accept(v)
+
+	}
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitCalculateValue(ctx *parser.CalculateValueContext) interface{} {
+	fmt.Println("VisitCalculateValue:", ctx.GetText())
+
+	for i := 0; i < ctx.GetChildCount(); i++ {
+		//fmt.Println(reflect.TypeOf(ctx.GetChild(i)).String())
+		ctx.GetChildOfType(i, nil).Accept(v)
+
 	}
 
 	return nil
@@ -247,10 +323,7 @@ func (v *RuleEngineVisitor) VisitITEMCALCU(ctx *parser.ITEMCALCUContext) interfa
 
 func (v *RuleEngineVisitor) VisitReturnStatement(ctx *parser.ReturnStatementContext) interface{} {
 	fmt.Println("VisitReturnStatement:", ctx.GetText())
-
-	for i := 0; i < ctx.GetChildCount(); i++ {
-		ctx.GetChildOfType(i, nil).Accept(v)
-	}
+	ctx.GetValue().Accept(v)
 
 	return nil
 }

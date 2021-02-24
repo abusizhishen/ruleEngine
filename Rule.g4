@@ -114,13 +114,13 @@ elseStatement:
 
 returnStatement:
     'return'
-        boolStatement|calculateStatement|valueType
+       value= boolStatement|calculateStatement|valueType
     ;
 
 statement
-    :boolStatement
+    :calculateStatement
+    |boolStatement
     |compareStatement
-    |calculateStatement
     |ifStatement
     |setValueStatement
     |returnStatement

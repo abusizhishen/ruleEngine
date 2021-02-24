@@ -14,11 +14,6 @@ func main() {
 	}
 
 	lex := parser.NewRuleLexer(input)
-	//tok := lex.NextToken()
-	//fmt.Println(lex.GetAllTokens())
-	//for _,token := range lex.GetAllTokens(){
-	//	fmt.Println(token)
-	//}
 	tokens := antlr.NewCommonTokenStream(lex, antlr.TokenDefaultChannel)
 
 	p := parser.NewRuleParser(tokens)
@@ -27,4 +22,4 @@ func main() {
 	fmt.Println("result: ", result)
 }
 
-var data = map[string]interface{}{"a": true, "b": 1, "c": 0}
+var data = map[string]interface{}{}
