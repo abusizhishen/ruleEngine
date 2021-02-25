@@ -3,6 +3,7 @@ package src
 import (
 	"fmt"
 	"github.com/abusizhishen/ruleEngine/parser"
+	"reflect"
 	"strconv"
 )
 
@@ -323,6 +324,7 @@ func (v *RuleEngineVisitor) VisitCalculateValue(ctx *parser.CalculateValueContex
 
 func (v *RuleEngineVisitor) VisitReturnStatement(ctx *parser.ReturnStatementContext) interface{} {
 	fmt.Println("VisitReturnStatement:", ctx.GetText())
+	fmt.Println(reflect.TypeOf(ctx.GetValue()).String())
 	ctx.GetValue().Accept(v)
 
 	return nil

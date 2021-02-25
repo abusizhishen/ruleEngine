@@ -114,7 +114,7 @@ elseStatement:
 
 returnStatement:
     'return'
-       value= boolStatement|calculateStatement|valueType
+       value= valueType|calculateStatement|boolStatement
     ;
 
 statement
