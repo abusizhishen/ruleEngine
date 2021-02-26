@@ -15,8 +15,11 @@ var ruleMap = make(map[string]string)
 
 func http() {
 	var g = gin.Default()
+	//添加规则
 	g.POST("/add", addRule)
+	//运行规则
 	g.POST("/run", runRule)
+	//展示规则
 	g.GET("/show", showRule)
 
 	err := g.Run(":80")
@@ -25,16 +28,19 @@ func http() {
 	}
 }
 
+//创建规则参数
 type Create struct {
 	Name string `json:"name" binding:"required"`
 	Rule string `json:"rule" binding:"required"`
 }
 
+//运行规则参数
 type RunParams struct {
 	Name string                 `json:"name" binding:"required"`
 	Data map[string]interface{} `json:"data" binding:"required"`
 }
 
+//添加规则
 func addRule(ctx *gin.Context) {
 	var create Create
 	err := ctx.ShouldBindJSON(&create)
@@ -51,6 +57,7 @@ func addRule(ctx *gin.Context) {
 	})
 }
 
+//运行规则
 func runRule(ctx *gin.Context) {
 	var param RunParams
 	err := ctx.ShouldBindJSON(&param)
@@ -77,6 +84,7 @@ func runRule(ctx *gin.Context) {
 	})
 }
 
+//展示规则
 func showRule(ctx *gin.Context) {
 	ctx.JSON(200, ruleMap)
 }
@@ -90,6 +98,7 @@ func getParser(rule string) *parser.RuleParser {
 	return p
 }
 
+//响应数据
 type Resp struct {
 	Code int         `json:"code"`
 	Data interface{} `json:"data"`
