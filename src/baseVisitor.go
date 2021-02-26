@@ -174,7 +174,7 @@ func (v *RuleEngineVisitor) VisitNUM(ctx *parser.NUMContext) interface{} {
 	fmt.Println("VisitNUM:", ctx.GetText())
 
 	str := ctx.GetText()
-	va, err := strconv.ParseFloat(str,10)
+	va, err := strconv.ParseFloat(str, 10)
 	if err == nil {
 		v.push(va)
 		return nil
@@ -228,11 +228,38 @@ func (v *RuleEngineVisitor) VisitIfStatement(ctx *parser.IfStatementContext) int
 			statement.Accept(v)
 		}
 
+	} else if len(ctx.AllElseIfStatement()) > 0 {
+		var condition interface{}
+		for _, elseIfStatement := range ctx.AllElseIfStatement() {
+			condition = elseIfStatement.Accept(v)
+			if !condition.(bool) {
+				continue
+			}
+			goto endFor
+		}
+
+		ctx.ElseStatement().Accept(v)
+	endFor:
 	} else {
 		ctx.ElseStatement().Accept(v)
 	}
 
 	return nil
+}
+
+func (v *RuleEngineVisitor) VisitElseIfStatement(ctx *parser.ElseIfStatementContext) interface{} {
+	fmt.Println("VisitElseIfStatement:", ctx.GetText())
+	ctx.BoolStatement().Accept(v)
+
+	if !v.pop().(bool) {
+		return false
+	}
+
+	for _, statement := range ctx.AllStatement() {
+		statement.Accept(v)
+	}
+
+	return true
 }
 
 func (v *RuleEngineVisitor) VisitSetValueStatement(ctx *parser.SetValueStatementContext) interface{} {
