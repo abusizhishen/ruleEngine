@@ -35,6 +35,9 @@ type RuleVisitor interface {
 	// Visit a parse tree produced by RuleParser#NUM.
 	VisitNUM(ctx *NUMContext) interface{}
 
+	// Visit a parse tree produced by RuleParser#boolValue.
+	VisitBoolValue(ctx *BoolValueContext) interface{}
+
 	// Visit a parse tree produced by RuleParser#IDENTIFY.
 	VisitIDENTIFY(ctx *IDENTIFYContext) interface{}
 

@@ -44,6 +44,10 @@ func (v *BaseRuleVisitor) VisitNUM(ctx *NUMContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRuleVisitor) VisitBoolValue(ctx *BoolValueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRuleVisitor) VisitIDENTIFY(ctx *IDENTIFYContext) interface{} {
 	return v.VisitChildren(ctx)
 }

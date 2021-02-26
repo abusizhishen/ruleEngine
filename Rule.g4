@@ -16,6 +16,11 @@ boolOperate
     |NOT
     ;
 
+    //antlr
+
+TRUE:'true';
+FALSE:'false';
+
 IDENTIFY:[a-zA-Z_]+;
 
 GT:'>';
@@ -46,9 +51,6 @@ compare
     |LT
     ;
 
-TRUE:'true';
-FALSE:'false';
-
 logical
     :AND
     |OR
@@ -63,6 +65,7 @@ compareStatement
     ;
 
 num:NUM#NUM;
+boolValue:TRUE|FALSE;
 identify:IDENTIFY#IDENTIFY;
 
 calculateValue
@@ -86,10 +89,12 @@ boolStatement
     ;
 
 valueType
-    :identify
+    :boolValue
+    |identify
     |num
     |calculateStatement
     ;
+
 setValueStatement
     : IDENTIFY '=' valueType ';'?
     ;
@@ -126,4 +131,4 @@ statement
     |returnStatement
     ;
 
-init:statement* EOF;
+init:statement* EOF?;

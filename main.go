@@ -19,6 +19,10 @@ func main() {
 	p := parser.NewRuleParser(tokens)
 	v := src.NewVisitor(data)
 	result := p.Init().Accept(v)
+
+	fmt.Println("result: ", result)
+
+	result = p.Init().Accept(v)
 	fmt.Println("result: ", result)
 }
 

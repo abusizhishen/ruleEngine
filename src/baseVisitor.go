@@ -60,8 +60,17 @@ func (v *RuleEngineVisitor) VisitInit(ctx *parser.InitContext) interface{} {
 	return v.stack
 }
 
+func (v *RuleEngineVisitor) VisitBOOLOPX(ctx *parser.BOOLOPXContext) interface{} {
+	fmt.Println("VisitBOOLOPX", ctx.GetText())
+
+	ctx.BoolStatement().Accept(v)
+	return nil
+}
 func (v *RuleEngineVisitor) VisitBOOLOP(ctx *parser.BOOLOPContext) interface{} {
 	fmt.Println("VisitBOOLOP", ctx.GetText())
+	ctx.BoolStatement(0).Accept(v)
+	ctx.BoolStatement(1).Accept(v)
+
 	right, left := v.pop(), v.pop()
 
 	switch ctx.GetOp().GetText() {
@@ -91,7 +100,7 @@ func (v *RuleEngineVisitor) VisitCOMPARE(ctx *parser.COMPAREContext) interface{}
 	fmt.Println("VisitCOMPARE: ", ctx.GetText())
 	ctx.CompareStatement(0).Accept(v)
 	ctx.CompareStatement(1).Accept(v)
-	right, left := v.pop().(int), v.pop().(int)
+	right, left := v.pop().(float64), v.pop().(float64)
 
 	switch ctx.GetOp().GetText() {
 	case ">=":
@@ -112,7 +121,7 @@ func (v *RuleEngineVisitor) VisitMULDIV(ctx *parser.MULDIVContext) interface{} {
 	fmt.Println("VisitMULDIV: ", ctx.GetText())
 	ctx.CalculateStatement(0).Accept(v)
 	ctx.CalculateStatement(1).Accept(v)
-	right, left := v.pop().(int), v.pop().(int)
+	right, left := v.pop().(float64), v.pop().(float64)
 
 	switch ctx.GetOp().GetText() {
 	case "*":
@@ -133,7 +142,7 @@ func (v *RuleEngineVisitor) VisitADDSUB(ctx *parser.ADDSUBContext) interface{} {
 	ctx.CalculateStatement(0).Accept(v)
 	ctx.CalculateStatement(1).Accept(v)
 
-	right, left := v.pop().(int), v.pop().(int)
+	right, left := v.pop().(float64), v.pop().(float64)
 
 	switch ctx.GetOp().GetText() {
 	case "+":
@@ -165,7 +174,7 @@ func (v *RuleEngineVisitor) VisitNUM(ctx *parser.NUMContext) interface{} {
 	fmt.Println("VisitNUM:", ctx.GetText())
 
 	str := ctx.GetText()
-	va, err := strconv.Atoi(str)
+	va, err := strconv.ParseFloat(str,10)
 	if err == nil {
 		v.push(va)
 		return nil
@@ -326,6 +335,19 @@ func (v *RuleEngineVisitor) VisitReturnStatement(ctx *parser.ReturnStatementCont
 	fmt.Println("VisitReturnStatement:", ctx.GetText())
 	fmt.Println(reflect.TypeOf(ctx.GetValue()).String())
 	ctx.GetValue().Accept(v)
+
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitBoolValue(ctx *parser.BoolValueContext) interface{} {
+	fmt.Println("VisitBoolValue:", ctx.GetText())
+
+	switch ctx.GetText() {
+	case "true":
+		v.push(true)
+	case "false":
+		v.push(false)
+	}
 
 	return nil
 }
