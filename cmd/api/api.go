@@ -11,18 +11,12 @@ func main() {
 	http()
 }
 
-type Rule struct {
-	rule string
-	p    *parser.RuleParser
-	v    *src.RuleEngineVisitor
-}
-
 var ruleMap = make(map[string]string)
 
 func http() {
 	var g = gin.Default()
-	g.POST("/create", createRule)
-	g.POST("/calculate", calculateRule)
+	g.POST("/add", addRule)
+	g.POST("/run", runRule)
 	g.GET("/show", showRule)
 
 	err := g.Run(":80")
@@ -36,12 +30,12 @@ type Create struct {
 	Rule string `json:"rule" binding:"required"`
 }
 
-type Calculate struct {
+type RunParams struct {
 	Name string                 `json:"name" binding:"required"`
 	Data map[string]interface{} `json:"data" binding:"required"`
 }
 
-func createRule(ctx *gin.Context) {
+func addRule(ctx *gin.Context) {
 	var create Create
 	err := ctx.ShouldBindJSON(&create)
 	if err != nil {
@@ -50,25 +44,37 @@ func createRule(ctx *gin.Context) {
 	}
 
 	ruleMap[create.Name] = create.Rule
-	ctx.JSON(200, nil)
+	ctx.JSON(200, Resp{
+		Code: 0,
+		Data: []int{},
+		Msg:  "success",
+	})
 }
 
-func calculateRule(ctx *gin.Context) {
-	var calculate Calculate
-	err := ctx.ShouldBindJSON(&calculate)
+func runRule(ctx *gin.Context) {
+	var param RunParams
+	err := ctx.ShouldBindJSON(&param)
 	if err != nil {
 		ctx.String(200, err.Error())
 		return
 	}
 
-	r, ok := ruleMap[calculate.Name]
+	r, ok := ruleMap[param.Name]
 	if !ok {
-		ctx.String(200, "无效的规则: "+calculate.Name)
+		ctx.JSON(200, Resp{
+			Code: 0,
+			Data: nil,
+			Msg:  "无效的规则" + param.Name,
+		})
 		return
 	}
-	v := src.NewVisitor(calculate.Data)
+	v := src.NewVisitor(param.Data)
 	p := getParser(r)
-	ctx.JSON(200, map[string]interface{}{"data": p.Init().Accept(v)})
+	ctx.JSON(200, Resp{
+		Code: 0,
+		Data: p.Init().Accept(v),
+		Msg:  "",
+	})
 }
 
 func showRule(ctx *gin.Context) {
@@ -81,13 +87,11 @@ func getParser(rule string) *parser.RuleParser {
 	tokens := antlr.NewCommonTokenStream(lex, antlr.TokenDefaultChannel)
 
 	p := parser.NewRuleParser(tokens)
-
 	return p
 }
 
-func resp(ctx *gin.Context, data interface{}) {
-	if data == nil {
-		data = map[string]string{}
-	}
-	ctx.JSON(200, data)
+type Resp struct {
+	Code int         `json:"code"`
+	Data interface{} `json:"data"`
+	Msg  string      `json:"msg"`
 }
