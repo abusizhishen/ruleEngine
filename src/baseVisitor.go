@@ -57,6 +57,7 @@ func (v *RuleEngineVisitor) VisitInit(ctx *parser.InitContext) interface{} {
 		statement.Accept(v)
 	}
 
+	fmt.Println(v.data)
 	return v.stack
 }
 
@@ -297,10 +298,17 @@ func (v *RuleEngineVisitor) VisitElseStatement(ctx *parser.ElseStatementContext)
 }
 
 func (v *RuleEngineVisitor) VisitValueType(ctx *parser.ValueTypeContext) interface{} {
-	fmt.Println("VisitCalculate:", ctx.GetText())
+	fmt.Println("VisitValueType:", ctx.GetText())
 
 	for i := 0; i < ctx.GetChildCount(); i++ {
-		ctx.GetChildOfType(i, nil).Accept(v)
+		//t1 := reflect.TypeOf(ctx.GetChild(i))
+		//fmt.Println("child: ", t1.String(), t1.Name())
+
+		child := ctx.GetChildOfType(i, nil)
+		//t := reflect.TypeOf(child)
+		//
+		//fmt.Println("child: ", child.GetText(), t.String(), t.Name())
+		child.Accept(v)
 	}
 
 	return nil

@@ -67,6 +67,7 @@ compareStatement
 num:NUM#NUM;
 boolValue:TRUE|FALSE;
 identify:IDENTIFY#IDENTIFY;
+stringValue:Str #STRING;
 
 calculateValue
     :identify
@@ -93,6 +94,10 @@ valueType
     |identify
     |num
     |calculateStatement
+    |mapValue
+    |getMapValue
+    |stringValue
+    |array
     ;
 
 setValueStatement
@@ -122,6 +127,14 @@ returnStatement:
        value= valueType|calculateStatement|boolStatement
     ;
 
+Str: '"' [a-zA-Z_]+ '"' ;
+pair: mapKey=Str ':' valueType;
+mapValue
+    :'{' (pair (',' pair)*)? '}'
+    ;
+getMapValue:identify'[' Str ']';
+
+array:'[' (valueType (',' valueType)*)? ']';
 statement
     :calculateStatement
     |boolStatement

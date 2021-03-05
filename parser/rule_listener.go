@@ -35,8 +35,14 @@ type RuleListener interface {
 	// EnterNUM is called when entering the NUM production.
 	EnterNUM(c *NUMContext)
 
+	// EnterBoolValue is called when entering the boolValue production.
+	EnterBoolValue(c *BoolValueContext)
+
 	// EnterIDENTIFY is called when entering the IDENTIFY production.
 	EnterIDENTIFY(c *IDENTIFYContext)
+
+	// EnterSTRING is called when entering the STRING production.
+	EnterSTRING(c *STRINGContext)
 
 	// EnterCalculateValue is called when entering the calculateValue production.
 	EnterCalculateValue(c *CalculateValueContext)
@@ -86,6 +92,18 @@ type RuleListener interface {
 	// EnterReturnStatement is called when entering the returnStatement production.
 	EnterReturnStatement(c *ReturnStatementContext)
 
+	// EnterPair is called when entering the pair production.
+	EnterPair(c *PairContext)
+
+	// EnterMapValue is called when entering the mapValue production.
+	EnterMapValue(c *MapValueContext)
+
+	// EnterGetMapValue is called when entering the getMapValue production.
+	EnterGetMapValue(c *GetMapValueContext)
+
+	// EnterArray is called when entering the array production.
+	EnterArray(c *ArrayContext)
+
 	// EnterStatement is called when entering the statement production.
 	EnterStatement(c *StatementContext)
 
@@ -119,8 +137,14 @@ type RuleListener interface {
 	// ExitNUM is called when exiting the NUM production.
 	ExitNUM(c *NUMContext)
 
+	// ExitBoolValue is called when exiting the boolValue production.
+	ExitBoolValue(c *BoolValueContext)
+
 	// ExitIDENTIFY is called when exiting the IDENTIFY production.
 	ExitIDENTIFY(c *IDENTIFYContext)
+
+	// ExitSTRING is called when exiting the STRING production.
+	ExitSTRING(c *STRINGContext)
 
 	// ExitCalculateValue is called when exiting the calculateValue production.
 	ExitCalculateValue(c *CalculateValueContext)
@@ -169,6 +193,18 @@ type RuleListener interface {
 
 	// ExitReturnStatement is called when exiting the returnStatement production.
 	ExitReturnStatement(c *ReturnStatementContext)
+
+	// ExitPair is called when exiting the pair production.
+	ExitPair(c *PairContext)
+
+	// ExitMapValue is called when exiting the mapValue production.
+	ExitMapValue(c *MapValueContext)
+
+	// ExitGetMapValue is called when exiting the getMapValue production.
+	ExitGetMapValue(c *GetMapValueContext)
+
+	// ExitArray is called when exiting the array production.
+	ExitArray(c *ArrayContext)
 
 	// ExitStatement is called when exiting the statement production.
 	ExitStatement(c *StatementContext)

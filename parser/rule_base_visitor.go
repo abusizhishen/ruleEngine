@@ -1,4 +1,4 @@
-// Code generated from Rule.g4 by ANTLR 4.8. DO NOT EDIT.
+// Code generated from Rule.g4 by ANTLR 4.7.2. DO NOT EDIT.
 
 package parser // Rule
 
@@ -49,6 +49,10 @@ func (v *BaseRuleVisitor) VisitBoolValue(ctx *BoolValueContext) interface{} {
 }
 
 func (v *BaseRuleVisitor) VisitIDENTIFY(ctx *IDENTIFYContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRuleVisitor) VisitSTRING(ctx *STRINGContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -113,6 +117,22 @@ func (v *BaseRuleVisitor) VisitElseStatement(ctx *ElseStatementContext) interfac
 }
 
 func (v *BaseRuleVisitor) VisitReturnStatement(ctx *ReturnStatementContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRuleVisitor) VisitPair(ctx *PairContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRuleVisitor) VisitMapValue(ctx *MapValueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRuleVisitor) VisitGetMapValue(ctx *GetMapValueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRuleVisitor) VisitArray(ctx *ArrayContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

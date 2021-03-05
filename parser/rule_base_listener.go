@@ -75,11 +75,23 @@ func (s *BaseRuleListener) EnterNUM(ctx *NUMContext) {}
 // ExitNUM is called when production NUM is exited.
 func (s *BaseRuleListener) ExitNUM(ctx *NUMContext) {}
 
+// EnterBoolValue is called when production boolValue is entered.
+func (s *BaseRuleListener) EnterBoolValue(ctx *BoolValueContext) {}
+
+// ExitBoolValue is called when production boolValue is exited.
+func (s *BaseRuleListener) ExitBoolValue(ctx *BoolValueContext) {}
+
 // EnterIDENTIFY is called when production IDENTIFY is entered.
 func (s *BaseRuleListener) EnterIDENTIFY(ctx *IDENTIFYContext) {}
 
 // ExitIDENTIFY is called when production IDENTIFY is exited.
 func (s *BaseRuleListener) ExitIDENTIFY(ctx *IDENTIFYContext) {}
+
+// EnterSTRING is called when production STRING is entered.
+func (s *BaseRuleListener) EnterSTRING(ctx *STRINGContext) {}
+
+// ExitSTRING is called when production STRING is exited.
+func (s *BaseRuleListener) ExitSTRING(ctx *STRINGContext) {}
 
 // EnterCalculateValue is called when production calculateValue is entered.
 func (s *BaseRuleListener) EnterCalculateValue(ctx *CalculateValueContext) {}
@@ -176,6 +188,30 @@ func (s *BaseRuleListener) EnterReturnStatement(ctx *ReturnStatementContext) {}
 
 // ExitReturnStatement is called when production returnStatement is exited.
 func (s *BaseRuleListener) ExitReturnStatement(ctx *ReturnStatementContext) {}
+
+// EnterPair is called when production pair is entered.
+func (s *BaseRuleListener) EnterPair(ctx *PairContext) {}
+
+// ExitPair is called when production pair is exited.
+func (s *BaseRuleListener) ExitPair(ctx *PairContext) {}
+
+// EnterMapValue is called when production mapValue is entered.
+func (s *BaseRuleListener) EnterMapValue(ctx *MapValueContext) {}
+
+// ExitMapValue is called when production mapValue is exited.
+func (s *BaseRuleListener) ExitMapValue(ctx *MapValueContext) {}
+
+// EnterGetMapValue is called when production getMapValue is entered.
+func (s *BaseRuleListener) EnterGetMapValue(ctx *GetMapValueContext) {}
+
+// ExitGetMapValue is called when production getMapValue is exited.
+func (s *BaseRuleListener) ExitGetMapValue(ctx *GetMapValueContext) {}
+
+// EnterArray is called when production array is entered.
+func (s *BaseRuleListener) EnterArray(ctx *ArrayContext) {}
+
+// ExitArray is called when production array is exited.
+func (s *BaseRuleListener) ExitArray(ctx *ArrayContext) {}
 
 // EnterStatement is called when production statement is entered.
 func (s *BaseRuleListener) EnterStatement(ctx *StatementContext) {}
