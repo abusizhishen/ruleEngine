@@ -16,8 +16,8 @@
 - [ ] number
   - [x] float64
 - [ ] struct
-- [ ] map
-- [ ] list
+- [x] map
+- [x] array
 
 ##开发工具
 - goland
