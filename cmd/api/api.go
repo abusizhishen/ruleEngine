@@ -5,6 +5,7 @@ import (
 	"github.com/abusizhishen/ruleEngine/src"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 )
 
 func main() {
@@ -42,11 +43,21 @@ type RunParams struct {
 
 //添加规则
 func addRule(ctx *gin.Context) {
-	var create Create
-	err := ctx.ShouldBindJSON(&create)
+	var name = ctx.Query("name")
+	body,err := ioutil.ReadAll(ctx.Request.Body)
 	if err != nil {
 		ctx.String(200, err.Error())
 		return
+	}
+
+	if len(body) == 0 {
+		ctx.String(200, "rule不能为空")
+		return
+	}
+
+	var create = Create{
+		Name: name,
+		Rule: string(body),
 	}
 
 	ruleMap[create.Name] = create.Rule

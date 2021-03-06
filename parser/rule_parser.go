@@ -1,4 +1,4 @@
-// Code generated from Rule.g4 by ANTLR 4.7.2. DO NOT EDIT.
+// Code generated from Rule.g4 by ANTLR 4.8. DO NOT EDIT.
 
 package parser // Rule
 
@@ -300,18 +300,6 @@ func (s *BoolOperateContext) ToStringTree(ruleNames []string, recog antlr.Recogn
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *BoolOperateContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterBoolOperate(s)
-	}
-}
-
-func (s *BoolOperateContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitBoolOperate(s)
-	}
-}
-
 func (s *BoolOperateContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -419,18 +407,6 @@ func (s *CalculateContext) GetRuleContext() antlr.RuleContext {
 
 func (s *CalculateContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *CalculateContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterCalculate(s)
-	}
-}
-
-func (s *CalculateContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitCalculate(s)
-	}
 }
 
 func (s *CalculateContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -546,18 +522,6 @@ func (s *CompareContext) ToStringTree(ruleNames []string, recog antlr.Recognizer
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *CompareContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterCompare(s)
-	}
-}
-
-func (s *CompareContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitCompare(s)
-	}
-}
-
 func (s *CompareContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -661,18 +625,6 @@ func (s *LogicalContext) GetRuleContext() antlr.RuleContext {
 
 func (s *LogicalContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *LogicalContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterLogical(s)
-	}
-}
-
-func (s *LogicalContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitLogical(s)
-	}
 }
 
 func (s *LogicalContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -800,18 +752,6 @@ func (s *COMPAREXContext) CompareStatement() ICompareStatementContext {
 	return t.(ICompareStatementContext)
 }
 
-func (s *COMPAREXContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterCOMPAREX(s)
-	}
-}
-
-func (s *COMPAREXContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitCOMPAREX(s)
-	}
-}
-
 func (s *COMPAREXContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -878,18 +818,6 @@ func (s *COMPAREContext) Compare() ICompareContext {
 	return t.(ICompareContext)
 }
 
-func (s *COMPAREContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterCOMPARE(s)
-	}
-}
-
-func (s *COMPAREContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitCOMPARE(s)
-	}
-}
-
 func (s *COMPAREContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -928,18 +856,6 @@ func (s *CalcuContext) CalculateStatement() ICalculateStatementContext {
 	return t.(ICalculateStatementContext)
 }
 
-func (s *CalcuContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterCalcu(s)
-	}
-}
-
-func (s *CalcuContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitCalcu(s)
-	}
-}
-
 func (s *CalcuContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -976,18 +892,6 @@ func (s *ITEMCOMPContext) CalculateValue() ICalculateValueContext {
 	}
 
 	return t.(ICalculateValueContext)
-}
-
-func (s *ITEMCOMPContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterITEMCOMP(s)
-	}
-}
-
-func (s *ITEMCOMPContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitITEMCOMP(s)
-	}
 }
 
 func (s *ITEMCOMPContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -1183,18 +1087,6 @@ func (s *NUMContext) NUM() antlr.TerminalNode {
 	return s.GetToken(RuleParserNUM, 0)
 }
 
-func (s *NUMContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterNUM(s)
-	}
-}
-
-func (s *NUMContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitNUM(s)
-	}
-}
-
 func (s *NUMContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -1287,18 +1179,6 @@ func (s *BoolValueContext) GetRuleContext() antlr.RuleContext {
 
 func (s *BoolValueContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *BoolValueContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterBoolValue(s)
-	}
-}
-
-func (s *BoolValueContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitBoolValue(s)
-	}
 }
 
 func (s *BoolValueContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -1420,18 +1300,6 @@ func (s *IDENTIFYContext) IDENTIFY() antlr.TerminalNode {
 	return s.GetToken(RuleParserIDENTIFY, 0)
 }
 
-func (s *IDENTIFYContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterIDENTIFY(s)
-	}
-}
-
-func (s *IDENTIFYContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitIDENTIFY(s)
-	}
-}
-
 func (s *IDENTIFYContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -1544,18 +1412,6 @@ func (s *STRINGContext) Str() antlr.TerminalNode {
 	return s.GetToken(RuleParserStr, 0)
 }
 
-func (s *STRINGContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterSTRING(s)
-	}
-}
-
-func (s *STRINGContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitSTRING(s)
-	}
-}
-
 func (s *STRINGContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -1660,18 +1516,6 @@ func (s *CalculateValueContext) GetRuleContext() antlr.RuleContext {
 
 func (s *CalculateValueContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *CalculateValueContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterCalculateValue(s)
-	}
-}
-
-func (s *CalculateValueContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitCalculateValue(s)
-	}
 }
 
 func (s *CalculateValueContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -1807,18 +1651,6 @@ func (s *ITEMCALCUContext) CalculateValue() ICalculateValueContext {
 	return t.(ICalculateValueContext)
 }
 
-func (s *ITEMCALCUContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterITEMCALCU(s)
-	}
-}
-
-func (s *ITEMCALCUContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitITEMCALCU(s)
-	}
-}
-
 func (s *ITEMCALCUContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -1889,18 +1721,6 @@ func (s *ADDSUBContext) AllSUB() []antlr.TerminalNode {
 
 func (s *ADDSUBContext) SUB(i int) antlr.TerminalNode {
 	return s.GetToken(RuleParserSUB, i)
-}
-
-func (s *ADDSUBContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterADDSUB(s)
-	}
-}
-
-func (s *ADDSUBContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitADDSUB(s)
-	}
 }
 
 func (s *ADDSUBContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -1975,18 +1795,6 @@ func (s *MULDIVContext) DIV(i int) antlr.TerminalNode {
 	return s.GetToken(RuleParserDIV, i)
 }
 
-func (s *MULDIVContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterMULDIV(s)
-	}
-}
-
-func (s *MULDIVContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitMULDIV(s)
-	}
-}
-
 func (s *MULDIVContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -2023,18 +1831,6 @@ func (s *CALCULATEXContext) CalculateStatement() ICalculateStatementContext {
 	}
 
 	return t.(ICalculateStatementContext)
-}
-
-func (s *CALCULATEXContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterCALCULATEX(s)
-	}
-}
-
-func (s *CALCULATEXContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitCALCULATEX(s)
-	}
 }
 
 func (s *CALCULATEXContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -2307,18 +2103,6 @@ func (s *BOOLContext) FALSE() antlr.TerminalNode {
 	return s.GetToken(RuleParserFALSE, 0)
 }
 
-func (s *BOOLContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterBOOL(s)
-	}
-}
-
-func (s *BOOLContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitBOOL(s)
-	}
-}
-
 func (s *BOOLContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -2385,18 +2169,6 @@ func (s *BOOLOPContext) BoolOperate() IBoolOperateContext {
 	return t.(IBoolOperateContext)
 }
 
-func (s *BOOLOPContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterBOOLOP(s)
-	}
-}
-
-func (s *BOOLOPContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitBOOLOP(s)
-	}
-}
-
 func (s *BOOLOPContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -2427,18 +2199,6 @@ func (s *IDENBOOLContext) GetRuleContext() antlr.RuleContext {
 
 func (s *IDENBOOLContext) IDENTIFY() antlr.TerminalNode {
 	return s.GetToken(RuleParserIDENTIFY, 0)
-}
-
-func (s *IDENBOOLContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterIDENBOOL(s)
-	}
-}
-
-func (s *IDENBOOLContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitIDENBOOL(s)
-	}
 }
 
 func (s *IDENBOOLContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -2479,18 +2239,6 @@ func (s *COMPAREBOOLContext) CompareStatement() ICompareStatementContext {
 	return t.(ICompareStatementContext)
 }
 
-func (s *COMPAREBOOLContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterCOMPAREBOOL(s)
-	}
-}
-
-func (s *COMPAREBOOLContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitCOMPAREBOOL(s)
-	}
-}
-
 func (s *COMPAREBOOLContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -2527,18 +2275,6 @@ func (s *BOOLOPXContext) BoolStatement() IBoolStatementContext {
 	}
 
 	return t.(IBoolStatementContext)
-}
-
-func (s *BOOLOPXContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterBOOLOPX(s)
-	}
-}
-
-func (s *BOOLOPXContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitBOOLOPX(s)
-	}
 }
 
 func (s *BOOLOPXContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -2805,18 +2541,6 @@ func (s *ValueTypeContext) ToStringTree(ruleNames []string, recog antlr.Recogniz
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValueTypeContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterValueType(s)
-	}
-}
-
-func (s *ValueTypeContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitValueType(s)
-	}
-}
-
 func (s *ValueTypeContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -2969,18 +2693,6 @@ func (s *SetValueStatementContext) GetRuleContext() antlr.RuleContext {
 
 func (s *SetValueStatementContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *SetValueStatementContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterSetValueStatement(s)
-	}
-}
-
-func (s *SetValueStatementContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitSetValueStatement(s)
-	}
 }
 
 func (s *SetValueStatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -3158,18 +2870,6 @@ func (s *IfStatementContext) ToStringTree(ruleNames []string, recog antlr.Recogn
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *IfStatementContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterIfStatement(s)
-	}
-}
-
-func (s *IfStatementContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitIfStatement(s)
-	}
-}
-
 func (s *IfStatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -3344,18 +3044,6 @@ func (s *ElseIfStatementContext) ToStringTree(ruleNames []string, recog antlr.Re
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ElseIfStatementContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterElseIfStatement(s)
-	}
-}
-
-func (s *ElseIfStatementContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitElseIfStatement(s)
-	}
-}
-
 func (s *ElseIfStatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -3493,18 +3181,6 @@ func (s *ElseStatementContext) GetRuleContext() antlr.RuleContext {
 
 func (s *ElseStatementContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *ElseStatementContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterElseStatement(s)
-	}
-}
-
-func (s *ElseStatementContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitElseStatement(s)
-	}
 }
 
 func (s *ElseStatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -3656,18 +3332,6 @@ func (s *ReturnStatementContext) ToStringTree(ruleNames []string, recog antlr.Re
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ReturnStatementContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterReturnStatement(s)
-	}
-}
-
-func (s *ReturnStatementContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitReturnStatement(s)
-	}
-}
-
 func (s *ReturnStatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -3805,18 +3469,6 @@ func (s *PairContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *PairContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterPair(s)
-	}
-}
-
-func (s *PairContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitPair(s)
-	}
-}
-
 func (s *PairContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -3934,18 +3586,6 @@ func (s *MapValueContext) GetRuleContext() antlr.RuleContext {
 
 func (s *MapValueContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *MapValueContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterMapValue(s)
-	}
-}
-
-func (s *MapValueContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitMapValue(s)
-	}
 }
 
 func (s *MapValueContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -4081,18 +3721,6 @@ func (s *GetMapValueContext) ToStringTree(ruleNames []string, recog antlr.Recogn
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *GetMapValueContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterGetMapValue(s)
-	}
-}
-
-func (s *GetMapValueContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitGetMapValue(s)
-	}
-}
-
 func (s *GetMapValueContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -4211,18 +3839,6 @@ func (s *ArrayContext) GetRuleContext() antlr.RuleContext {
 
 func (s *ArrayContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *ArrayContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterArray(s)
-	}
-}
-
-func (s *ArrayContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitArray(s)
-	}
 }
 
 func (s *ArrayContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -4404,18 +4020,6 @@ func (s *StatementContext) ToStringTree(ruleNames []string, recog antlr.Recogniz
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *StatementContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterStatement(s)
-	}
-}
-
-func (s *StatementContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitStatement(s)
-	}
-}
-
 func (s *StatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case RuleVisitor:
@@ -4567,18 +4171,6 @@ func (s *InitContext) GetRuleContext() antlr.RuleContext {
 
 func (s *InitContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *InitContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.EnterInit(s)
-	}
-}
-
-func (s *InitContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(RuleListener); ok {
-		listenerT.ExitInit(s)
-	}
 }
 
 func (s *InitContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
