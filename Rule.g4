@@ -127,7 +127,7 @@ returnStatement:
        value= valueType|calculateStatement|boolStatement
     ;
 
-Str: '"' [a-zA-Z_]+ '"' ;
+Str: '"' [a-zA-Z_0-9]+ '"' ;
 pair: mapKey=Str ':' valueType;
 mapValue
     :'{' (pair (',' pair)*)? '}'
