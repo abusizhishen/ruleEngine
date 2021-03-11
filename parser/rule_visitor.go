@@ -101,6 +101,9 @@ type RuleVisitor interface {
 	// Visit a parse tree produced by RuleParser#getMapValue.
 	VisitGetMapValue(ctx *GetMapValueContext) interface{}
 
+	// Visit a parse tree produced by RuleParser#getArrayValue.
+	VisitGetArrayValue(ctx *GetArrayValueContext) interface{}
+
 	// Visit a parse tree produced by RuleParser#array.
 	VisitArray(ctx *ArrayContext) interface{}
 

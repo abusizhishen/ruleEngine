@@ -132,6 +132,10 @@ func (v *BaseRuleVisitor) VisitGetMapValue(ctx *GetMapValueContext) interface{} 
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseRuleVisitor) VisitGetArrayValue(ctx *GetArrayValueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseRuleVisitor) VisitArray(ctx *ArrayContext) interface{} {
 	return v.VisitChildren(ctx)
 }

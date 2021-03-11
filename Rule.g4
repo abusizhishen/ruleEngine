@@ -96,6 +96,7 @@ valueType
     |calculateStatement
     |mapValue
     |getMapValue
+    |getArrayValue
     |stringValue
     |array
     ;
@@ -133,6 +134,7 @@ mapValue
     :'{' (pair (',' pair)*)? '}'
     ;
 getMapValue:identify'[' Str ']';
+getArrayValue:identify'[' num ']';
 
 array:'[' (valueType (',' valueType)*)? ']';
 statement
