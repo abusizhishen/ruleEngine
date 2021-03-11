@@ -29,6 +29,7 @@ curl -XPOST 'HTTP://127.0.0.1/add?name=compare' \
   "name":"compare", //name参数为添加的规则名
   "data":{} //data可添加规则运行需要的额外的参数
 }
+```
 
 ### 运算
 - [x] 算术运算 加减乘除
