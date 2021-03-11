@@ -7,6 +7,29 @@
     - 提供接口输入参数并进行计算输出结果
 -  内嵌到程序中
 
+### api方式
+```shell
+#运行程序
+go run cmd/api/api.go
+
+#添加规则
+curl -XPOST 'HTTP://127.0.0.1/add?name=compare' \
+-H 'content-Type:text/plain' \
+-d 'a=3;b=4;a>b'
+
+#调用规则
+ curl -XPOST 'HTTP://127.0.0.1/run' \
+ -H 'content-type:application/json' \
+ -d '{"name":"compare","data":{}}'
+```
+
+### 参数
+```json
+{
+  "name":"compare", //name参数为添加的规则名
+  "data":{} //data可添加规则运行需要的额外的参数
+}
+
 ### 运算
 - [x] 算术运算 加减乘除
   - [x] float64 op float64
@@ -15,8 +38,8 @@
 
 ### 语句
 - [x] if、elsif、else
-- [x] return
-
+- [ ] return
+    - [ ]作用域
 ### 数据类型
 - [x] bool
 - [x] string
