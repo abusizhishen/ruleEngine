@@ -1,4 +1,4 @@
-// Code generated from Rule.g4 by ANTLR 4.8. DO NOT EDIT.
+// Code generated from Rule.g4 by ANTLR 4.7.2. DO NOT EDIT.
 
 package parser // Rule
 
@@ -31,6 +31,9 @@ type RuleVisitor interface {
 
 	// Visit a parse tree produced by RuleParser#ITEMCOMP.
 	VisitITEMCOMP(ctx *ITEMCOMPContext) interface{}
+
+	// Visit a parse tree produced by RuleParser#key.
+	VisitKey(ctx *KeyContext) interface{}
 
 	// Visit a parse tree produced by RuleParser#NUM.
 	VisitNUM(ctx *NUMContext) interface{}
@@ -98,11 +101,8 @@ type RuleVisitor interface {
 	// Visit a parse tree produced by RuleParser#mapValue.
 	VisitMapValue(ctx *MapValueContext) interface{}
 
-	// Visit a parse tree produced by RuleParser#getMapValue.
-	VisitGetMapValue(ctx *GetMapValueContext) interface{}
-
-	// Visit a parse tree produced by RuleParser#getArrayValue.
-	VisitGetArrayValue(ctx *GetArrayValueContext) interface{}
+	// Visit a parse tree produced by RuleParser#getMapOrArrayValue.
+	VisitGetMapOrArrayValue(ctx *GetMapOrArrayValueContext) interface{}
 
 	// Visit a parse tree produced by RuleParser#array.
 	VisitArray(ctx *ArrayContext) interface{}
