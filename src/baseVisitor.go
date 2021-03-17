@@ -28,6 +28,10 @@ func (v *RuleEngineVisitor) pop() interface{} {
 	return vv
 }
 
+func (v *RuleEngineVisitor) Data() map[string]interface{} {
+	return v.data
+}
+
 func (v *RuleEngineVisitor) push(i interface{}) {
 	v.stack = append(v.stack, i)
 }
