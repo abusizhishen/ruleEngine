@@ -76,8 +76,8 @@ calculateValue
     ;
 
 calculateStatement
-    :calculateStatement (op=(MUL|DIV) calculateStatement)+ #MULDIV
-    |calculateStatement (op=(ADD|SUB) calculateStatement)+ #ADDSUB
+    :calculateStatement op=(MUL|DIV) calculateStatement #MULDIV
+    |calculateStatement op=(ADD|SUB) calculateStatement #ADDSUB
     |calculateValue #ITEMCALCU
     |'(' calculateStatement')' #CALCULATEX
     ;
