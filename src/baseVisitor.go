@@ -3,6 +3,7 @@ package src
 import (
 	"fmt"
 	"github.com/abusizhishen/ruleEngine/parser"
+	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"reflect"
 	"strconv"
 )
@@ -98,6 +99,13 @@ func (v *RuleEngineVisitor) VisitCOMPAREX(ctx *parser.COMPAREXContext) interface
 func (v *RuleEngineVisitor) VisitCalcu(ctx *parser.CalcuContext) interface{} {
 	fmt.Println("VisitCalcu", ctx.GetText())
 	ctx.CalculateStatement().Accept(v)
+	return nil
+}
+
+func (v *RuleEngineVisitor) VisitCALCULATEX(ctx *parser.CALCULATEXContext) interface{} {
+	fmt.Println("VisitCALCULATEX: ", ctx.GetText())
+	ctx.CalculateStatement().Accept(v)
+
 	return nil
 }
 
@@ -389,4 +397,16 @@ func (v *RuleEngineVisitor) VisitBoolValue(ctx *parser.BoolValueContext) interfa
 	}
 
 	return nil
+}
+
+func Run(rule string,data map[string]interface{}) (result interface{}) {
+	input := antlr.NewInputStream(rule)
+
+	lex := parser.NewRuleLexer(input)
+	tokens := antlr.NewCommonTokenStream(lex, antlr.TokenDefaultChannel)
+
+	p := parser.NewRuleParser(tokens)
+	v := NewVisitor(data)
+	result = p.Init().Accept(v)
+	return result
 }
