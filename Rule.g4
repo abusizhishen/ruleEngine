@@ -128,12 +128,12 @@ returnStatement:
        value= valueType|calculateStatement|boolStatement
     ;
 
-Str: '"' [a-zA-Z_0-9]+ '"' ;
+Str: '"' [a-zA-Z_0-9 ']+ '"' ;
 pair: mapKey=Str ':' valueType;
 mapValue
     :'{' (pair (',' pair)*)? '}'
     ;
-getMapOrArrayValue:identify ('[' key ']')+;
+getMapOrArrayValue:identify ('[' IDENTIFY ']')+;
 
 array:'[' (valueType (',' valueType)*)? ']';
 statement
