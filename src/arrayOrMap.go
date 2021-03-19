@@ -10,7 +10,7 @@ func (v *RuleEngineVisitor) VisitGetMapOrArrayValue(ctx *parser.GetMapOrArrayVal
 	fmt.Println("VisitGetMapOrArrayValue:", ctx.GetText())
 
 	ctx.Identify().Accept(v)
-	for _, key := range ctx.AllKey() {
+	for _, key := range ctx.AllIDENTIFY() {
 		key.Accept(v)
 		//keyType := v.pop()
 		//switch keyType.(type) {

@@ -134,10 +134,12 @@ mapValue
     :'{' (pair (',' pair)*)? '}'
     ;
 getMapOrArrayValue:identify ('[' IDENTIFY ']')+;
+funCall: identify'(' valueType (',' valueType)* ')';
 
 array:'[' (valueType (',' valueType)*)? ']';
 statement
-    :calculateStatement
+    :funCall
+    |calculateStatement
     |boolStatement
     |compareStatement
     |ifStatement
