@@ -1,4 +1,4 @@
-// Code generated from Rule.g4 by ANTLR 4.7.2. DO NOT EDIT.
+// Code generated from Rule.g4 by ANTLR 4.8. DO NOT EDIT.
 
 package parser // Rule
 
@@ -133,6 +133,10 @@ func (v *BaseRuleVisitor) VisitMapValue(ctx *MapValueContext) interface{} {
 }
 
 func (v *BaseRuleVisitor) VisitGetMapOrArrayValue(ctx *GetMapOrArrayValueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseRuleVisitor) VisitFunCall(ctx *FunCallContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
