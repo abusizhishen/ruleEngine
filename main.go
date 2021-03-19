@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	input, err := antlr.NewFileStream("test.ru")
+	input, err := antlr.NewFileStream("test.rule")
 	if err != nil {
 		panic(err)
 	}
@@ -18,12 +18,11 @@ func main() {
 
 	p := parser.NewRuleParser(tokens)
 	v := src.NewVisitor(data)
+	v.SetFun("add", func(a,b float64) float64{return a+b})
 	result := p.Init().Accept(v)
 
 	fmt.Println("result: ", result)
 
-	result = p.Init().Accept(v)
-	fmt.Println("result: ", result)
 }
 
 var data = map[string]interface{}{}
